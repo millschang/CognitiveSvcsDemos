@@ -1,0 +1,17 @@
+textarea 
+{
+height: 100px;
+width: 600px;
+align: left;
+}
+
+button
+{
+height: 50px;
+width: 150px;
+font-size: 18pt;
+}
+#OutputDiv
+{
+font-size: 24pt;
+}
