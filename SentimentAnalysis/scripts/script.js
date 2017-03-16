@@ -22,12 +22,12 @@ $(function () {
             else if (data.documents.length > 0) {
 				var score = data.documents[0].score;
 				if (score > 0.5){
-					outputText = "That is a Positive thing to say!";
+					outputText = "That is a Positive thing to say! Score=" + score.toFixed(2);
 					$("#PositiveImage").css("display", "inline");
 					$("#NegativeImage").css("display", "none");
 				}
 				else{
-					outputText = "That is a Negative thing to say!";
+					outputText = "That is a Negative thing to say! Score=" + score.toFixed(2);
 					$("#PositiveImage").css("display", "none");
 					$("#NegativeImage").css("display", "inline");
 				}

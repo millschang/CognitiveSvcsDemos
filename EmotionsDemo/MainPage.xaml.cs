@@ -63,16 +63,11 @@ namespace EmotionsDemo
             Windows.Storage.StorageFolder localFolder =
                 Windows.Storage.ApplicationData.Current.LocalFolder;
 
-            // Replace with your key and uncomment!
-            //localSettings.Values["EmotionApiKey"] = "<Emotion API key>";
-            string emotionApiKey = "8b31fae51d9940c686bae7f00b4f4265"; // localSettings.Values["EmotionApiKey"].ToString();
+            string emotionApiKey = Utilities.GetKey();
 
             var emotionServiceClient = new EmotionServiceClient(emotionApiKey);
 
             Emotion[] emotionResult = await emotionServiceClient.RecognizeAsync(imageUrl);
-
-            //emotionResult.
-            //var firstEmotion = emotionResult.First();
 
             var sb1 = new StringBuilder();
             var sb2 = new StringBuilder();

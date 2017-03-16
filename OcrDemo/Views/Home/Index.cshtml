@@ -3,7 +3,7 @@
 }
 
 <div class="jumbotron">
-    <h1>Project Oxford</h1>
+    <h1>Microsoft Cognitive Services</h1>
     <h2>Computer Vision OCR Demo</h2>
 </div>
 
@@ -18,8 +18,17 @@
                 <option value="http://www.poemhunter.com/i/poem_images/875/the-hippopotamus.jpg">Nash</option>
                 <option value="http://www.poemhunter.com/i/poem_images/695/a-noiseless-patient-spider.jpg">Whitman</option>
                 <option value="http://msbellon.weebly.com/uploads/2/9/1/4/2914983/5028403_orig.png?0">Shakespeare</option>
-                <option value="http://s5.favim.com/orig/69/love-spanish-text-Favim.com-645990.jpg">Spanish</option>
-                
+                <option value="http://2.bp.blogspot.com/-b_UaOR_a1iU/UkeIAj2YGLI/AAAAAAAAGWM/bpXh202HAQk/s1600/spanish-love-poem.jpg">Sobran Las Palabras (Spanish)</option>
+                <option value="https://s-media-cache-ak0.pinimg.com/564x/b0/e4/81/b0e48170856a3e4d03bb2c5dfe990fff.jpg">5 Ratoncitos (Spanish)</option>
+                <option value="https://s-media-cache-ak0.pinimg.com/564x/ea/9b/16/ea9b16ef39b5a61b52ca8726a90e9679.jpg">C'est la noelle (French)</option>
+                <option value="http://www.mounttemple.ie/wp-content/uploads/2013/10/french-poem-2-e1382017346693.jpg">Je voudrais Aller par dela la Mer (French)</option>
+            </select>
+        </p>
+        <p>
+            <select id="LanguageDropdown">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
             </select>
         </p>
         <p>
@@ -53,36 +62,45 @@
 
 
             $("#GetTextFromPictureButton").click(function () {
+                var outputDiv = $("#OutputDiv");
+                outputDiv.text("Thinking...");
                 var url = $("#ImageUrlDropdown").val();
+                var language = $("#LanguageDropdown").val();
 
-                // TODO: Replace the value below with your subscription key
-                var subscriptionKey = "e4df9eb47d0a40a4b43e627483ed5bb0";
 
+
+                var subscriptionKey = getKey() || "Copy your Subscription key here";
+
+                var webSvcUrl = "https://api.projectoxford.ai/vision/v1.0/ocr";
+                webSvcUrl = webSvcUrl + "?language=" + language;
             $.ajax({
                 type: "POST",
-                url: "https://api.projectoxford.ai/vision/v1.0/ocr?language=en",
+                url: webSvcUrl,
                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
                 contentType: "application/json",
                 data: '{ "Url": "' + url + '" }'
             }).done(function (data) {
-                var outputDiv = $("#OutputDiv");
                 outputDiv.text("");
 
-                var linesOfText = data.regions[0].lines;
-                for (var i = 0; i < linesOfText.length; i++) {
-                    var output = "";
+                var regionsOfText = data.regions;
+                for (var h = 0; h < regionsOfText.length; h++) {
+                    var linesOfText = data.regions[h].lines;
+                    for (var i = 0; i < linesOfText.length; i++) {
+                        var output = "";
 
-                    var thisLine = linesOfText[i];
-                    var words = thisLine.words;
-                    for (var j = 0; j < words.length; j++) {
-                        var thisWord = words[j];
-                        output += thisWord.text;
-                        output += " ";
+                        var thisLine = linesOfText[i];
+                        var words = thisLine.words;
+                        for (var j = 0; j < words.length; j++) {
+                            var thisWord = words[j];
+                            output += thisWord.text;
+                            output += " ";
+
+                        }
+                        var newDiv = "<div>" + output + "</div>";
+                        outputDiv.append(newDiv);
 
                     }
-                    var newDiv = "<div>" + output + "</div>";
-                    outputDiv.append(newDiv);
-
+                    outputDiv.append("<hr>");
                 }
                 
             }).fail(function (err) {
@@ -99,6 +117,10 @@
 
     });
 
+
+    var getKey = function () {
+        return "e4df9eb47d0a40a4b43e627483ed5bb0";
+    }
 
 </script>
     }

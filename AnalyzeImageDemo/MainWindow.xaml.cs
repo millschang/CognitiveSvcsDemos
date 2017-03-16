@@ -37,11 +37,11 @@ namespace AnalyzeImageDemo
         private async void AnalyzeButton_Click(object sender, RoutedEventArgs e)
         {
 
-            string subscriptionKey = "e4df9eb47d0a40a4b43e627483ed5bb0";
+            CaptionTextBox.Text = "Analyzing...";
+
+            string subscriptionKey = Utilities.GetKey();
             VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKey);
 
-            //string imageUrl = "http://imguol.com/2013/03/14/christopher-power-1363276244301_400x500.jpg";
-            //string[] visualFeatures = null;
             var visualFeaturesList = new List<VisualFeature>();
             visualFeaturesList.Add(VisualFeature.Adult);
             visualFeaturesList.Add(VisualFeature.Categories);
