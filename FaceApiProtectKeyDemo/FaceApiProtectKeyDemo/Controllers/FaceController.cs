@@ -33,7 +33,8 @@ namespace FaceApiProtectKeyDemo.Controllers
 
         private static IEnumerable<Face> GetFaceData(string imageUrl)
         {
-            var webSvcUrl = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            //var webSvcUrl = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
             string subscriptionKey = ConfigurationManager.AppSettings["SubscriptionKey"];
             if (subscriptionKey == null)
             {

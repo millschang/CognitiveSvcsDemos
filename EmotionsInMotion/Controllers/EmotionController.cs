@@ -34,7 +34,8 @@ namespace EmotionsInMotion.Controllers
         private List<Emotion> GetEmotionData(string imageUrl)
         {
 
-            var webSvcUrl = "https://api.projectoxford.ai/emotion/v1.0/recognize";
+            var webSvcUrl = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
+            //var webSvcUrl = "https://api.projectoxford.ai/emotion/v1.0/recognize";
             string subscriptionKey = ConfigurationManager.AppSettings["EmotionApiSubscriptionKey"];
             if (subscriptionKey == null)
             {

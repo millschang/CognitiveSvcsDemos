@@ -258,11 +258,23 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -311,7 +323,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -2187,11 +2199,23 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -2240,7 +2264,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -3966,11 +3990,23 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -4019,7 +4055,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -5743,11 +5779,23 @@
           "runtimes/win10-x64/native/_._": {}
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -5796,7 +5844,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -7522,11 +7570,23 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -7575,7 +7635,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -9299,11 +9359,23 @@
           "runtimes/win10-x86/native/_._": {}
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -9352,7 +9424,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -11078,11 +11150,23 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
-      "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
+      "Microsoft.ProjectOxford.Common/1.0.324": {
         "type": "package",
         "dependencies": {
           "Microsoft.Net.Http": "2.2.29",
-          "Newtonsoft.Json": "7.0.1"
+          "Newtonsoft.Json": "8.0.2"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll": {}
+        }
+      },
+      "Microsoft.ProjectOxford.Emotion/1.0.336": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ProjectOxford.Common": "1.0.324"
         },
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll": {}
@@ -11131,7 +11215,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -13353,12 +13437,22 @@
         "runtimes/win81-x86/native/api-ms-win-security-cpwl-l1-1-0.dll"
       ]
     },
-    "Microsoft.ProjectOxford.Emotion/1.0.1.1": {
-      "sha512": "BLYaspXe1MJGWzhQhXzmpnf3/ZGHk8J7mAAJO1o7SfTmhirTUXb9TdV8ZwJeQpXVWosjiB0t0BV214DaYGgAeg==",
+    "Microsoft.ProjectOxford.Common/1.0.324": {
+      "sha512": "6smz5b0u5LfOvFrucVQHcioy4yBLnIsa+ACqEJUKhZHNymCJh1Tb/UauhFwo9CNbk4u72JOIms1ehM3feOFzpA==",
       "type": "package",
-      "path": "Microsoft.ProjectOxford.Emotion/1.0.1.1",
+      "path": "Microsoft.ProjectOxford.Common/1.0.324",
       "files": [
-        "Microsoft.ProjectOxford.Emotion.1.0.1.1.nupkg.sha512",
+        "Microsoft.ProjectOxford.Common.1.0.324.nupkg.sha512",
+        "Microsoft.ProjectOxford.Common.nuspec",
+        "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Common.dll"
+      ]
+    },
+    "Microsoft.ProjectOxford.Emotion/1.0.336": {
+      "sha512": "TuiEoCjvtbD9TaIE4zAZ6KrboPmq43hX+qTUyofS2vM9uGs/X0vYgjJAfHblNfllpATt/q/N1ojYihxuX1sFkQ==",
+      "type": "package",
+      "path": "Microsoft.ProjectOxford.Emotion/1.0.336",
+      "files": [
+        "Microsoft.ProjectOxford.Emotion.1.0.336.nupkg.sha512",
         "Microsoft.ProjectOxford.Emotion.nuspec",
         "lib/portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10/Microsoft.ProjectOxford.Emotion.dll"
       ]
@@ -13424,12 +13518,12 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Newtonsoft.Json/7.0.1": {
-      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+    "Newtonsoft.Json/8.0.2": {
+      "sha512": "e5yWmEfu68rmtG431zl9N/7PlNKQDIuiDW5MHlEFAZcecakcxrIGnKqrPAtWNILzK2oNanRB5cD150MYhECK3g==",
       "type": "package",
-      "path": "Newtonsoft.Json/7.0.1",
+      "path": "Newtonsoft.Json/8.0.2",
       "files": [
-        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "Newtonsoft.Json.8.0.2.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -16055,7 +16149,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "Microsoft.ProjectOxford.Emotion >= 1.0.1.1"
+      "Microsoft.ProjectOxford.Emotion >= 1.0.336"
     ],
     "UAP,Version=v10.0": []
   },
