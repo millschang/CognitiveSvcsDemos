@@ -7,4 +7,8 @@ http://www.stepbystep.com/wp-content/uploads/2013/03/Best-Womens-Sunglasses-for-
 http://cache3.asset-cache.net/gc/481501023-close-up-portrait-of-old-black-man-with-gettyimages.jpg?v=1&c=IWSAsset&k=2&d=esg%2bVK6qs4oIjoYYcweKEaG2pptAYfOPpuLOWcyxTSE%3d
 
 WALT
+<<<<<<< HEAD
 http://4.bp.blogspot.com/-7Huw463rVZY/UZjtJyT_13I/AAAAAAAAANY/Cp2V_SPGg1w/s1600/Walt+Disney+Quotes.jpg
+=======
+https://41.media.tumblr.com/7431e4d6b2dc5fa07284a7bf4faaa8ca/tumblr_nowc6i5Cy51uw9en0o1_500.jpg
+>>>>>>> 1de5a76a90b0ace2deed5b731d63487e4464f566

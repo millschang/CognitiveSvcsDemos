@@ -22,6 +22,7 @@ textarea {
   position: relative;
 }
 
+<<<<<<< HEAD
 #OutputDiv{
     font-size:32px;
     padding-top: 5px;
@@ -29,6 +30,8 @@ textarea {
     background-color: aqua;
 }
 
+=======
+>>>>>>> 1de5a76a90b0ace2deed5b731d63487e4464f566
 .EyeMouthImage
  {
   position: absolute;
