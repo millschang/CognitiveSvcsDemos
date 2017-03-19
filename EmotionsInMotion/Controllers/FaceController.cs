@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using EmotionsInMotion.Models;
 using Newtonsoft.Json;
@@ -13,18 +11,6 @@ namespace EmotionsInMotion.Controllers
 {
     public class FaceController : ApiController
     {
-        // GET: api/Face
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Face/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Face
         public IEnumerable<Face> Post([FromBody]string imageUrl)
         {
@@ -34,7 +20,7 @@ namespace EmotionsInMotion.Controllers
         private static IEnumerable<Face> GetFaceData(string imageUrl)
         {
             var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
-            //var webSvcUrl = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            // TODO: Replace the FaceApiSubscriptionKey value in Web.config with your key
             string subscriptionKey = ConfigurationManager.AppSettings["FaceApiSubscriptionKey"];
             if (subscriptionKey == null)
             {
@@ -79,5 +65,18 @@ namespace EmotionsInMotion.Controllers
         {
             throw new Exception("DELETE not supported");
         }
+
+        // GET: api/Emotion
+        public IEnumerable<string> Get()
+        {
+            throw new Exception("GET not supported");
+        }
+
+        // GET: api/Emotion/5
+        public string Get(int id)
+        {
+            throw new Exception("GET not supported");
+        }
+
     }
 }

@@ -10,9 +10,8 @@ namespace EmotionsDemo
     {
         public static string GetKey()
         {
-            // Replace with your key and uncomment!
-            //localSettings.Values["EmotionApiKey"] = "<Emotion API key>";
-            string emotionApiKey = "8b31fae51d9940c686bae7f00b4f4265"; // localSettings.Values["EmotionApiKey"].ToString();
+            // Replace with your key!
+            string emotionApiKey = "f2af617a6f054b3d8451d58b913e7974"; 
             return emotionApiKey;
         }
     }

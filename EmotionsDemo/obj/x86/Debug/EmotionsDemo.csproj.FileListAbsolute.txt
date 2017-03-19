@@ -9,8 +9,6 @@ C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Core\AppxManifest.x
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Core\EmotionsDemo.exe
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\EmotionsDemo.build.appxrecipe
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Microsoft.CSharp.dll
-C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Net.Http.Extensions.dll
-C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Net.Http.Primitives.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.ComponentModel.DataAnnotations.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Core.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Net.dll
@@ -23,8 +21,6 @@ C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Xml.Linq.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Xml.Serialization.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.Xml.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\System.dll
-C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Microsoft.ProjectOxford.Common.dll
-C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Microsoft.ProjectOxford.Emotion.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Microsoft.VisualBasic.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Microsoft.Win32.Primitives.dll
 C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Newtonsoft.Json.dll
@@ -194,3 +190,4 @@ C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\qualifiers.txt
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\qualifiers.txt.intermediate
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\ProjectArchitectures.txt
+C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\EmotionsDemo.csprojResolveAssemblyReference.cache

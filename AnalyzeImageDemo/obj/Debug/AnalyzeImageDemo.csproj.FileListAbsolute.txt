@@ -20,7 +20,6 @@ C:\development\ProjectOxfordDemos\AnalyzeImageDemo\obj\Debug\AnalyzeImageDemo.ex
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\obj\Debug\AnalyzeImageDemo.pdb
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\bin\Debug\AnalyzeImageDemo.exe
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\bin\Debug\AnalyzeImageDemo.pdb
-C:\development\ProjectOxfordDemos\AnalyzeImageDemo\bin\Debug\Microsoft.ProjectOxford.Vision.dll
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\bin\Debug\Newtonsoft.Json.dll
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\bin\Debug\Newtonsoft.Json.xml
 C:\development\ProjectOxfordDemos\AnalyzeImageDemo\obj\Debug\AnalyzeImageDemo.csprojResolveAssemblyReference.cache

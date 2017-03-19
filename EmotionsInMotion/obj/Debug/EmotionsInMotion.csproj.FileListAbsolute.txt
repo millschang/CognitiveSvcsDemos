@@ -1,5 +1,4 @@
 C:\development\ProjectOxfordDemos\EmotionsInMotion\obj\Debug\EmotionsInMotion.csproj.App.config
-C:\development\ProjectOxfordDemos\EmotionsInMotion\obj\Debug\EmotionsInMotion.csprojResolveAssemblyReference.cache
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\roslyn\csc.exe
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -32,8 +31,6 @@ C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.Owin.Security.G
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.Owin.Security.OAuth.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.Owin.Security.Twitter.dll
-C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.ProjectOxford.Common.dll
-C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.ProjectOxford.Emotion.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Microsoft.Web.Infrastructure.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Newtonsoft.Json.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\Owin.dll
@@ -87,3 +84,4 @@ C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\System.Web.WebPages.Deplo
 C:\development\ProjectOxfordDemos\EmotionsInMotion\bin\System.Web.WebPages.Razor.xml
 C:\development\ProjectOxfordDemos\EmotionsInMotion\obj\Debug\EmotionsInMotion.dll
 C:\development\ProjectOxfordDemos\EmotionsInMotion\obj\Debug\EmotionsInMotion.pdb
+C:\development\ProjectOxfordDemos\EmotionsInMotion\obj\Debug\EmotionsInMotion.csprojResolveAssemblyReference.cache

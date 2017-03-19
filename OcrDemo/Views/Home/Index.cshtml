@@ -66,18 +66,13 @@
                 outputDiv.text("Thinking...");
                 var url = $("#ImageUrlDropdown").val();
                 var language = $("#LanguageDropdown").val();
-
-
-
-                var subscriptionKey = getKey() || "Copy your Subscription key here";
-                
+                var computerVisionKey = getKey() || "Copy your Subscription key here";
                 var webSvcUrl = "https://westus.api.cognitive.microsoft.com/vision/v1.0/ocr";
-                //var webSvcUrl = "https://api.projectoxford.ai/vision/v1.0/ocr";
                 webSvcUrl = webSvcUrl + "?language=" + language;
             $.ajax({
                 type: "POST",
                 url: webSvcUrl,
-                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
+                headers: { "Ocp-Apim-Subscription-Key": computerVisionKey },
                 contentType: "application/json",
                 data: '{ "Url": "' + url + '" }'
             }).done(function (data) {
@@ -120,7 +115,8 @@
 
 
     var getKey = function () {
-        return "e4df9eb47d0a40a4b43e627483ed5bb0";
+        // TODO: Replace with your Computer Vision API key
+        return "6afdfbf76e3240298ad0d585006a896a";
     }
 
 </script>

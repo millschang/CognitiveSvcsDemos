@@ -56,7 +56,6 @@ namespace SpeechToTextDemo
 
         }
 
-
         void OnPartialResponseReceivedHandler(object sender, PartialSpeechResponseEventArgs e)
         {
             string result = e.PartialResult;

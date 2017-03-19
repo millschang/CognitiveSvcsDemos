@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Emotion.Contract;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using EmotionsDemo.Models;
 
 namespace EmotionsDemo
 {
@@ -57,86 +48,96 @@ namespace EmotionsDemo
 
         private async void GetEmotions(string imageUrl)
         {
-
-            Windows.Storage.ApplicationDataContainer localSettings =
-                Windows.Storage.ApplicationData.Current.LocalSettings;
-            Windows.Storage.StorageFolder localFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
-
             string emotionApiKey = Utilities.GetKey();
-
-            var emotionServiceClient = new EmotionServiceClient(emotionApiKey);
-
-            Emotion[] emotionResult = await emotionServiceClient.RecognizeAsync(imageUrl);
-
-            var sb1 = new StringBuilder();
-            var sb2 = new StringBuilder();
-            var faceNumber = 0;
-            foreach (Emotion em in emotionResult)
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", emotionApiKey);
+            string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize ";
+            HttpResponseMessage response;
+            var json = "{'url': '" + imageUrl + "'}";
+            byte[] byteData = Encoding.UTF8.GetBytes(json);
+            using (var content = new ByteArrayContent(byteData))
             {
-                faceNumber++;
-                var scores = em.Scores;
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = await client.PostAsync(uri, content);
+            }
 
-                var anger = scores.Anger;
-                var contempt = scores.Contempt;
-                var disgust = scores.Disgust;
-                var fear = scores.Fear;
-                var happiness = scores.Happiness;
-                var neutral = scores.Neutral;
-                var surprise = scores.Surprise;
-                var sadness = scores.Sadness;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                var results = JsonConvert.DeserializeObject(data);
+                RawResultsTextblock.Text = results.ToString();
 
-                sb1.Append(string.Format("Face {0}\n", faceNumber));
-                sb1.Append("Scores:\n");
-                sb1.Append(string.Format("Anger: {0:0.000000}\n", anger));
-                sb1.Append(string.Format("Contempt: {0:0.000000}\n", contempt));
-                sb1.Append(string.Format("Disgust: {0:0.000000}\n", disgust));
-                sb1.Append(string.Format("Fear: {0:0.000000}\n", fear));
-                sb1.Append(string.Format("Happiness: {0:0.000000}\n", happiness));
-                sb1.Append(string.Format("Neutral: {0:0.000000}\n", neutral));
-                sb1.Append(string.Format("Surprise: {0:0.000000}\n", surprise));
-                sb1.Append(string.Format("Sadness: {0:0.000000}\n", sadness));
-                sb1.Append("\n");
+                Face[] faces = JsonConvert.DeserializeObject<Face[]>(data);
+                var sb1 = new StringBuilder();
+                var sb2 = new StringBuilder();
+                var faceNumber = 0;
+                foreach (Face face in faces)
+                {
+                    faceNumber++;
+                    var scores = face.Scores;
 
-                var emotionScoresList = new List<EmotionScore>();
-                emotionScoresList.Add(new EmotionScore("anger", anger));
-                emotionScoresList.Add(new EmotionScore("contempt", contempt));
-                emotionScoresList.Add(new EmotionScore("disgust", disgust));
-                emotionScoresList.Add(new EmotionScore("fear", fear));
-                emotionScoresList.Add(new EmotionScore("happiness", happiness));
-                emotionScoresList.Add(new EmotionScore("neutral", neutral));
-                emotionScoresList.Add(new EmotionScore("surprise", surprise));
-                emotionScoresList.Add(new EmotionScore("sadness", sadness));
+                    var anger = scores.Anger;
+                    var contempt = scores.Contempt;
+                    var disgust = scores.Disgust;
+                    var fear = scores.Fear;
+                    var happiness = scores.Happiness;
+                    var neutral = scores.Neutral;
+                    var surprise = scores.Surprise;
+                    var sadness = scores.Sadness;
 
-                var maxEmotionScore = emotionScoresList.Max(e => e.EmotionValue);
-                var likelyEmotion = emotionScoresList.First(e => e.EmotionValue == maxEmotionScore);
+                    sb1.Append(string.Format("Face {0}\n", faceNumber));
+                    sb1.Append("Scores:\n");
+                    sb1.Append(string.Format("Anger: {0:0.0000}\n", anger));
+                    sb1.Append(string.Format("Contempt: {0:0.0000}\n", contempt));
+                    sb1.Append(string.Format("Disgust: {0:0.0000}\n", disgust));
+                    sb1.Append(string.Format("Fear: {0:0.0000}\n", fear));
+                    sb1.Append(string.Format("Happiness: {0:0.0000}\n", happiness));
+                    sb1.Append(string.Format("Neutral: {0:0.0000}\n", neutral));
+                    sb1.Append(string.Format("Surprise: {0:0.0000}\n", surprise));
+                    sb1.Append(string.Format("Sadness: {0:0.0000}\n", sadness));
+                    sb1.Append("\n");
+
+                    
+                    var emotionScoresList = new List<EmotionScore>();
+                    emotionScoresList.Add(new EmotionScore("anger", anger));
+                    emotionScoresList.Add(new EmotionScore("contempt", contempt));
+                    emotionScoresList.Add(new EmotionScore("disgust", disgust));
+                    emotionScoresList.Add(new EmotionScore("fear", fear));
+                    emotionScoresList.Add(new EmotionScore("happiness", happiness));
+                    emotionScoresList.Add(new EmotionScore("neutral", neutral));
+                    emotionScoresList.Add(new EmotionScore("surprise", surprise));
+                    emotionScoresList.Add(new EmotionScore("sadness", sadness));
+
+                    var maxEmotionScore = emotionScoresList.Max(e => e.EmotionValue);
+                    var likelyEmotion = emotionScoresList.First(e => e.EmotionValue == maxEmotionScore);
 
 
-                string likelyEmotionText = string.Format("Face {0} is {1:N2}% likely to experiencing: {2}\n\n", 
-                    faceNumber, likelyEmotion.EmotionValue * 100, likelyEmotion.EmotionName.ToUpper());
-                sb2.Append(likelyEmotionText);
+                    string likelyEmotionText = string.Format("Face {0} is {1:N2}% likely to experiencing: {2}\n\n",
+                        faceNumber, likelyEmotion.EmotionValue * 100, likelyEmotion.EmotionName.ToUpper());
+                    sb2.Append(likelyEmotionText);
+
+                }
+                var resultsDump = sb1.ToString();
+                ResultsTextblock.Text = resultsDump;
+
+                LikelyEmotionsTextblock.Text = sb2.ToString();
 
             }
-            var resultsDump = sb1.ToString();
-            RawResultsTextblock.Text = resultsDump;
+            else
+            {
+                var error = response.StatusCode;
+                var errorMsg = response.ReasonPhrase;
+                ResultsTextblock.Text = "Error: " + error.ToString() + ": " + errorMsg;
+                RawResultsTextblock.Text = response.ToString();
+            }
 
-            ResultsTextblock.Text = sb2.ToString();
-        }
-
-        private string xGetLikelyEmotion()
-        {
-            return "";
         }
 
         private void ClearReponsesButton_Click(object sender, RoutedEventArgs e)
         {
             RawResultsTextblock.Text = "";
-
             ResultsTextblock.Text = "";
-
-
         }
-
     }
 }
 

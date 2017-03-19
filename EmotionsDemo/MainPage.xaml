@@ -8,25 +8,27 @@
     mc:Ignorable="d">
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
-
-            
         <ComboBox Name="ImageUrlCombobox"></ComboBox>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            
-            <Button Name="GetEmotionsButton" Height="200" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Click="GetEmotionsButton_Click">
-                Get Emotions
-            </Button>
-            <StackPanel Orientation="Vertical" Padding="5" BorderThickness="5" Width="300" Background="LightGray">
-                <TextBlock Name="ResultsTexblockLabel">Results:</TextBlock>
-                <TextBlock Name="ResultsTextblock" TextWrapping="WrapWholeWords"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Padding="5" Width="300" Background="LightGray" BorderThickness="5">
-                <TextBlock Name="RawResultsTexblockLabel">Raw Results:</TextBlock>
-                <TextBlock Name="RawResultsTextblock"></TextBlock>
-            </StackPanel>
-                <Button Name="ClearReponsesButton" Height="200" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" 
+            <Button Name="GetEmotionsButton" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" Click="GetEmotionsButton_Click">
+                    <TextBlock TextWrapping="Wrap">Get Emotions</TextBlock>
+                </Button>
+                <StackPanel Orientation="Vertical" Padding="5" Width="300" Background="LightGray" BorderThickness="5">
+                    <TextBlock Name="RawResultsTexblockLabel">Raw Results:</TextBlock>
+                    <TextBlock Name="RawResultsTextblock"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Padding="5" BorderThickness="5" Width="300" Background="LightGray">
+                    <TextBlock Name="ResultsTexblockLabel">Results:</TextBlock>
+                    <TextBlock Name="ResultsTextblock" TextWrapping="WrapWholeWords"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Padding="5" BorderThickness="5" Width="300" Background="LightGray">
+                    <TextBlock Name="LikelyEmotionsTexblockLabel">Emotions:</TextBlock>
+                    <TextBlock Name="LikelyEmotionsTextblock" TextWrapping="WrapWholeWords"></TextBlock>
+                </StackPanel>
+                <Button Name="ClearReponsesButton" Height="200" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         FontSize="32" Click="ClearReponsesButton_Click">
-                    Clear Responses
+
+                    <TextBlock TextWrapping="Wrap">Clear Responses</TextBlock>
                 </Button>
 
             </StackPanel>

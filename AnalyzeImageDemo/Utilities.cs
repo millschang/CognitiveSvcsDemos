@@ -10,7 +10,9 @@ namespace AnalyzeImageDemo
     {
         public static string GetKey()
         {
-            return "e4df9eb47d0a40a4b43e627483ed5bb0";
+            var computerVisionKey = "6afdfbf76e3240298ad0d585006a896a";
+            return computerVisionKey;
+
         }
     }
 }
