@@ -1,0 +1,130 @@
+<html>
+
+<head>
+	<title>Face Verification Demo</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/site.css">
+	<script src="scripts/jquery-1.10.2.min.js"></script>
+	<script src="scripts/script.js"></script>
+	<script src="scripts/getkey.js"></script>
+</head>
+
+<body>
+	<div class="jumbotron">
+		<h1>Microsoft Cognitive Services</h1>
+		<h2>Identify Face Demo</h2>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5">
+			Group Name: <input type="text" id="GroupNameTextBox"></input>
+		</div>
+		<div class="col-md-2">
+			<button type="button" id="CreateGroupButton">Create Group</button>
+		</div>
+
+	</div>
+	<hr>
+
+	<div class="row">
+		<div class="col-md-2">
+			<button type="button" id="ListAllGroupsButton">List all Groups</button>
+		</div>
+
+		<div class="col-md-5">
+			<ul id="GroupsList">
+			</ul>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-2">
+			<button type="button" id="DeleteAllGroupsButton">Delete all Groups</button>
+		</div>
+	</div>
+
+	<hr>
+	<div class="row">
+		<div class="col-md-2">
+			<label>Group: </label>
+			<select id="GroupList"></select>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			Person Name: <input type="text" id="PersonNameTextBox"></input>
+		</div>
+		<div class="col-md-2">
+			<button type="button" id="AddPersonToGroupButton">
+				Add Person to Group
+			</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<input id="PhotoToUpload" type="file" name="PhotoToUpload" multiple accept="image/*" />
+		</div>
+
+		<div class="col-md-2">
+			<button type="button" id="AddFacesToGroupButton">Add Faces to Person</button>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<label>Person: </label>
+			<select id="PersonDropDown"></select>
+		</div>
+
+	</div>
+	
+	<div class="row">
+		<div class="col-md-2">
+			<button type="button" id="GetPersonsInGroupButton">Get all Persons in Group</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<button type="button" id="TrainGroupButton">Train Group</button>
+		</div>
+		<div class="col-md-2">
+			<button type="button" id="CheckTrainingStatusButton">Check Training Status</button>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-4">
+			<input type="file" name="TestPhoto" id="TestPhoto" accept="image/*"  />
+		</div>
+		<div class="col-md-2">
+			<button type="button" id="IdentifyFacesButton">Identify Faces in Photo</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1">&nbsp;</div>
+		<div class="col-md-4">
+		<div id="MatchFaceOutputDiv"></div>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-8">
+			<div id="StatusLabel">Ready</div>
+		</div>
+	</div>
+
+	<hr>
+
+
+</body>
+
+</html>
