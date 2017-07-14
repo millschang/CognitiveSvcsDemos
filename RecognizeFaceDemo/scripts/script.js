@@ -26,7 +26,59 @@ $(function () {
         })
     };
 
-    var listAllGroups = function () {
+    var getAllGroups = function () {
+        return new Promise((resolve, reject) => {
+            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            var listGroupApiUrl = faceApiUrl + "persongroups?top=100";
+            var output = "";
+
+            $.ajax({
+                type: "GET",
+                url: listGroupApiUrl,
+                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
+                contentType: "application/json"
+            }).done(function (data) {
+                resolve(data);
+            }).fail(function (err) {
+                var status = "ERROR! " + err.responseText;
+                reject(status);
+            });
+        })
+    };
+
+    var listAllGroups = async function () {
+
+        $("#GroupsList").text("Working...");
+        var output = "";
+
+        var groupsList = await getAllGroups();
+
+        $("#GroupsDropDown").empty();
+        $("#GroupsList").text("");
+        if (groupsList.length) {
+            groupsList.forEach(
+                function (item, index) {
+                    var pgLi = document.createElement("li");
+                    var text = item.personGroupId + " (" + item.name + ")";
+                    pgLi.appendChild(document.createTextNode(text));
+                    $("#GroupsList").append(pgLi);
+
+                    var pgOption = document.createElement("option");
+                    pgOption.value = item.personGroupId;
+                    pgOption.text = item.personGroupId;
+                    $("#GroupsDropDown").innerHtml = "";
+                    $("#GroupsDropDown").append(pgOption);
+                }
+            )
+        }
+        else {
+            $("#GroupsList").text("No groups to list");
+        }
+        var status = "got list";
+
+    };
+
+    var listAllGroups_old = function () {
         return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
             var listGroupApiUrl = faceApiUrl + "persongroups?top=100";
@@ -52,8 +104,8 @@ $(function () {
                             var pgOption = document.createElement("option");
                             pgOption.value = item.personGroupId;
                             pgOption.text = item.personGroupId;
-                            $("#GroupList").innerHtml = "";
-                            $("#GroupList").append(pgOption);
+                            $("#GroupsDropDown").innerHtml = "";
+                            $("#GroupsDropDown").append(pgOption);
                         }
                     )
                 }
@@ -95,16 +147,16 @@ $(function () {
                                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey }
                             }).done(function (data) {
                                 status += "successfully deleted group " + groupId + "<br>";
+                                resolve(status);
 
                             }).fail(function (err) {
                                 status += "Failed to delete group " + groupId + "<br>";
-                                // $("#StatusLabel").html(status);
+                                reject(status);
                             });
 
                         }
                     )
                 }
-                resolve(status);
 
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
@@ -340,7 +392,7 @@ $(function () {
                     )
                 }
                 else {
-                    reject ("No matching faces found");
+                    reject("No matching faces found");
                 }
 
             }).fail(function (err) {
@@ -426,7 +478,7 @@ $(function () {
 
     //AddPersonToGroupButton
     $("#AddPersonToGroupButton").click(async function () {
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         var personName = $("#PersonNameTextBox").val();
         if (!groupId) {
 
@@ -446,7 +498,7 @@ $(function () {
 
     $("#GetPersonsInGroupButton").click(async function () {
         $("#PersonsList").text("Waiting...");
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
             $("#PersonsStatusLabel").text(status);
@@ -458,14 +510,14 @@ $(function () {
     })
 
     $("#AddFacesToPersonButton").click(async function () {
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             status += "No Group selected";
             return;
         }
 
-        var groupId = $("#GroupList").val();
-        var personId = $("#PersonDropDown").val(); 
+        var groupId = $("#GroupsDropDown").val();
+        var personId = $("#PersonDropDown").val();
 
         var fileSelector = $("#PhotoToUpload");
         var files = fileSelector[0].files;
@@ -483,7 +535,7 @@ $(function () {
 
     //TrainGroupButton
     $("#TrainGroupButton").click(async function () {
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
             $("#PersonsStatusLabel").text(status);
@@ -496,7 +548,7 @@ $(function () {
 
     // CheckTrainingStatusButton
     $("#CheckTrainingStatusButton").click(async function () {
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
             $("#StatusLabel").text(status);
@@ -512,13 +564,13 @@ $(function () {
 
         $("#MatchFaceOutputDiv").html("Working...");
 
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             status += "No Group selected";
             return;
         }
 
-        var groupId = $("#GroupList").val();
+        var groupId = $("#GroupsDropDown").val();
 
         var fileSelector = $("#TestPhoto");
         var files = fileSelector[0].files;
@@ -536,7 +588,6 @@ $(function () {
 
     listAllGroups();
 
-    console.log("done");
 
 });
 
