@@ -298,11 +298,14 @@ $(function () {
                 data: face,
                 processData: false
             }).done(function (data) {
-                var status = "Added faces to Group " + groupId + ", PersonId " + personId;
+                var status 
+                    = "Added face " + data.persistedFaceId
+                    + " to GroupId=" + groupId 
+                    + ", PersonId=" + personId;
                 resolve(status);
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
-                reject(status);
+                resolve(status);
             });
         })
     };
@@ -365,7 +368,6 @@ $(function () {
         })
     };
 
-
     var identifyFaces = function (groupId, faceIds) {
 
         return new Promise((resolve, reject) => {
@@ -393,6 +395,10 @@ $(function () {
                 if (data.length) {
                     data.forEach(
                         function (foundFace, index) {
+                            if (foundFace.candidates.length==0){
+                                resolve ("No match found");
+                               
+                            }
                             var bestMatch = foundFace.candidates[0];
                             var personId = bestMatch.personId;
                             var confidence = bestMatch.confidence;
@@ -504,31 +510,31 @@ $(function () {
 
     //AddPersonToGroupButton
     $("#AddPersonToGroupButton").click(async function () {
-        $("#PersonsStatusLabel").text("");
+        $("#PersonsStatusDiv").text("");
         var groupId = $("#GroupsDropDown").val();
         var personName = $("#PersonNameTextBox").val();
         if (!groupId) {
 
-            $("#PersonsStatusLabel").text("No Group specified");
+            $("#PersonsStatusDiv").text("No Group specified");
             return;
         }
         if (!personName) {
-            $("#PersonsStatusLabel").text("No Person Name specified");
+            $("#PersonsStatusDiv").text("No Person Name specified");
             return;
         }
         var status = await addPersonToGroup(groupId, personName);
-        $("#PersonsStatusLabel").text(status);
+        $("#PersonsStatusDiv").text(status);
         listPersonsInGroup(groupId);
 
     });
 
     $("#GetPersonsInGroupButton").click(async function () {
-        $("#PersonsStatusLabel").text("");
+        $("#PersonsStatusDiv").text("");
         $("#PersonsList").text("Waiting...");
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
-            $("#PersonsStatusLabel").text(status);
+            $("#PersonsStatusDiv").text(status);
             return;
         }
         listPersonsInGroup(groupId);
@@ -552,9 +558,14 @@ $(function () {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 status += await addFaceToPerson(personId, groupId, file);
-                $("#PersonsStatusLabel").text(status);
-
+                status += "<br>"
+                $("#PersonsStatusDiv").html(status);
             }
+            status+= "<div>Complete!<br>" 
+                + files.length
+                + " faces added.</div>"; 
+            $("#PersonsStatusDiv").html(status);
+            
         }
     })
 
@@ -563,12 +574,12 @@ $(function () {
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
-            $("#PersonsStatusLabel").text(status);
+            $("#PersonsStatusDiv").text(status);
             return;
         }
         var status = await trainGroup(groupId);
 
-        $("#PersonsStatusLabel").text(status);
+        $("#PersonsStatusDiv").text(status);
     })
 
     // CheckTrainingStatusButton
@@ -581,7 +592,7 @@ $(function () {
         }
 
         var status = await checkTrainingStatus(groupId);
-        $("#PersonsStatusLabel").text(status);
+        $("#PersonsStatusDiv").text(status);
     })
 
     // IdentifyFacesButton
