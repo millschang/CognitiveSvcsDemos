@@ -17,10 +17,12 @@ $(function () {
                 data: '{"name":"' + groupId + '","userData":"test group"}'
             }).done(function (data) {
                 var status = "Group " + groupId + " created";
+                // $("#StatusLabel").text(status);
                 resolve(status);
 
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
+                // $("#StatusLabel").text(status);
                 reject(status);
             });
         })
@@ -44,6 +46,7 @@ $(function () {
                 if (data.length) {
                     data.forEach(
                         function (item, index) {
+
                             var pgLi = document.createElement("li");
                             var text = item.personGroupId + " (" + item.name + ")";
                             pgLi.appendChild(document.createTextNode(text));
@@ -54,6 +57,11 @@ $(function () {
                             pgOption.text = item.personGroupId;
                             $("#GroupList").innerHtml = "";
                             $("#GroupList").append(pgOption);
+
+                            console.log(index);
+                            console.log(item.personGroupId);
+                            console.log(item.name);
+                            console.log(item.userData);
                         }
                     )
                 }
@@ -62,10 +70,12 @@ $(function () {
                 }
                 var status = "got list";
                 resolve(status);
+                //$("#StatusLabel").text(status);
 
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
                 reject(status);
+                // $("#StatusLabel").text(status);
             });
         })
     };
@@ -74,6 +84,7 @@ $(function () {
         return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
             var getGroupApiUrl = faceApiUrl + "persongroups?top=100";
+            // $("#StatusLabel").html("Working...<br>");
 
             $.ajax({
                 type: "GET",
@@ -87,6 +98,12 @@ $(function () {
                     data.forEach(
                         function (item, index) {
 
+                            console.log(index);
+                            console.log(item.personGroupId);
+                            console.log(item.name);
+                            console.log(item.userData);
+
+
                             var groupId = item.personGroupId;
                             var deleteGroupUri = faceApiUrl + "persongroups/" + groupId;
                             $.ajax({
@@ -95,6 +112,8 @@ $(function () {
                                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey }
                             }).done(function (data) {
                                 status += "successfully deleted group " + groupId + "<br>";
+                                // $("#StatusLabel").html(status);
+
 
                             }).fail(function (err) {
                                 status += "Failed to delete group " + groupId + "<br>";
@@ -105,10 +124,12 @@ $(function () {
                     )
                 }
                 resolve(status);
+                // $("#StatusLabel").text(status);
 
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
                 reject(status);
+                // $("#StatusLabel").text(status);
 
             });
         })
@@ -136,12 +157,14 @@ $(function () {
             }).done(function (data) {
                 status = "Created person " + personName + " in Group " + groupId;
                 resolve(status);
+                // $("#StatusLabel").text("Created person " + personName + " in Group " + groupId);
 
             }).fail(function (err) {
                 status += "Failed to create person " + personName
                     + " in Group " + groupId + "<br>"
                     + err.responseText;
                 reject(status);
+                // $("#StatusLabel").html(status);
             });
         })
     };
@@ -151,6 +174,7 @@ $(function () {
 
             if (!groupId) {
                 reject("No GroupID specified");
+                // $("#StatusLabel").text("No GroupID specified");
             }
 
             var subscriptionKey = getKey() || "Copy your Subscription key here";
@@ -187,9 +211,12 @@ $(function () {
                     }, this);
                     personsList += "</ul>"
                     resolve(personsList);
+                    // $("#StatusLabel").html(groupList);
                 }
                 else {
                     reject("No persons in group");
+                    // $("#StatusLabel").text("No persons in group " + groupId);
+
                 }
 
             }).fail(function (err) {
@@ -205,6 +232,7 @@ $(function () {
 
         return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
+
 
             var addFacesToPersonApiUrl = faceApiUrl + "persongroups/"
                 + groupId
@@ -222,9 +250,12 @@ $(function () {
             }).done(function (data) {
                 var status = "Added faces to Group " + groupId + ", PersonId " + personId;
                 resolve(status);
+                // $("#StatusLabel").text(status);
+
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
                 reject(status);
+                // $("#StatusLabel").text(status);
             });
         })
     };
@@ -234,10 +265,12 @@ $(function () {
             // https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/{personGroupId}/train
             if (!groupId) {
                 reject("No Group specified");
+                // $("#StatusLabel").text("No GroupID specified");
                 return;
             }
 
             var subscriptionKey = getKey() || "Copy your Subscription key here";
+
             var trainGroupApiUrl = faceApiUrl + "persongroups/"
                 + groupId
                 + "/train";
@@ -248,10 +281,13 @@ $(function () {
                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
                 body: "{}"
             }).done(function (data) {
+                // $("#StatusLabel").text("Started training group " + groupId);
                 resolve(status);
             }).fail(function (err) {
                 status += "Failed to train  group " + groupId + "<br>";
                 reject(status);
+                // $("#StatusLabel").html(status);
+                // return status;
             });
         })
     };
@@ -261,6 +297,8 @@ $(function () {
             // https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/{personGroupId}/training
             if (!groupId) {
                 reject("No group specified");
+                // $("#StatusLabel").text("No GroupID specified");
+                // return "No GroupID specified";
             }
 
             var subscriptionKey = getKey() || "Copy your Subscription key here";
@@ -275,6 +313,11 @@ $(function () {
                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
                 body: "{}"
             }).done(function (data) {
+                // $("#StatusLabel").text(
+                //     "Training status for group " + groupId + ":"
+                //     + data.status
+                // );
+                // return "Training status for group " + groupId + ":" + data.status + "!!!";
                 resolve(
                     "Training status for group " + groupId + ":"
                     + data.status
@@ -283,6 +326,8 @@ $(function () {
                 status += "Error checking Training status for group " + groupId + "<br>"
                     + err.responseText;
                 reject(status);
+                // $("#StatusLabel").html(status);
+                // return status;
             });
         })
     };
@@ -290,7 +335,7 @@ $(function () {
 
     var identifyFaces = function (groupId, faceIds) {
 
-        return new Promise((resolve, reject) => {
+        // return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             // https://westus.api.cognitive.microsoft.com/face/v1.0/identify
@@ -318,8 +363,8 @@ $(function () {
                             var bestMatch = foundFace.candidates[0];
                             var personId = bestMatch.personId;
                             var confidence = bestMatch.confidence;
-
                             // Get name of bestMatch
+
                             var getPersonApiUrl = faceApiUrl + "persongroups/"
                                 + groupId
                                 + "/persons/"
@@ -333,21 +378,28 @@ $(function () {
                             }).done(function (data) {
                                 var personName = data.name;
                                 output += "Name: " + personName;
+                                //output += "Id: " + personId;
                                 output += " (Confidence: " + (confidence * 100).toFixed(2) + "%)<br>";
-                                resolve(output);
+                                // $("#MatchFaceOutputDiv").html(output);
                             })
                         }
                     )
                 }
                 else {
-                    reject ("No matching faces found");
+                    //reject("No matching faces found");
+                    output += "No matching faces found";
+                    // $("#MatchFaceOutputDiv").html(output);
                 }
 
+                return output;
+                //resolve(output);
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
-                reject(status);
+                return status;
+                // reject(status);
+                // $("#MatchFaceOutputDiv").text(status);
             });
-        })
+        // })
     };
 
     var detectFace = function (groupId, face) {
@@ -379,12 +431,15 @@ $(function () {
                             faceIds += '"' + faceId + '"';
                         }
                     )
-                    resolve(faceIds);
+                    output +=  identifyFaces(groupId, faceIds);
+                    
+                    resolve(output);
                 }
 
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
                 reject(status);
+                // $("#StatusLabel").text(status);
             });
         })
     };
@@ -431,10 +486,12 @@ $(function () {
         if (!groupId) {
 
             $("#PersonsStatusLabel").text("No Group specified");
+            // $("#StatusLabel").text("No Group specified");
             return;
         }
         if (!personName) {
             $("#PersonsStatusLabel").text("No Person Name specified");
+            // $("#StatusLabel").text("No Person Name specified");
             return;
         }
         var status = await addPersonToGroup(groupId, personName);
@@ -465,7 +522,7 @@ $(function () {
         }
 
         var groupId = $("#GroupList").val();
-        var personId = $("#PersonDropDown").val(); 
+        var personId = $("#PersonDropDown").val(); //"ac9c2896-183f-4780-b193-ed55ae5eeb6e"; // TODO: Select / add person
 
         var fileSelector = $("#PhotoToUpload");
         var files = fileSelector[0].files;
@@ -526,13 +583,12 @@ $(function () {
             // At least 1 file selected. Test it
             var file = files[0];
 
-            var faceIds = await detectFace(groupId, file);
-            var output = await identifyFaces(groupId, faceIds);
-
+            var output = await detectFace(groupId, file);
             $("#MatchFaceOutputDiv").html(output);
 
         }
     })
+
 
     listAllGroups();
 

@@ -16,6 +16,12 @@
 	</div>
 
 	<div class="row">
+		<div class="col-md-4">
+			<h2>Groups</h2>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-md-5">
 			Group Name: <input type="text" id="GroupNameTextBox"></input>
 		</div>
@@ -47,6 +53,12 @@
 
 	<hr>
 	<div class="row">
+		<div class="col-md-4">
+			<h2>Persons</h2>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-md-2">
 			<label>Group: </label>
 			<select id="GroupList"></select>
@@ -70,7 +82,7 @@
 		</div>
 
 		<div class="col-md-2">
-			<button type="button" id="AddFacesToGroupButton">Add Faces to Person</button>
+			<button type="button" id="AddFacesToPersonButton">Add Faces to Person</button>
 		</div>
 
 	</div>
@@ -81,10 +93,15 @@
 		</div>
 
 	</div>
-	
+
 	<div class="row">
 		<div class="col-md-2">
 			<button type="button" id="GetPersonsInGroupButton">Get all Persons in Group</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<div id="PersonsList"></div>
 		</div>
 	</div>
 
@@ -97,11 +114,17 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-5">
+			<label id="PersonsStatusLabel"></label>
+		</div>
+	</div>
+
 	<hr>
 
 	<div class="row">
 		<div class="col-md-4">
-			<input type="file" name="TestPhoto" id="TestPhoto" accept="image/*"  />
+			<input type="file" name="TestPhoto" id="TestPhoto" accept="image/*" />
 		</div>
 		<div class="col-md-2">
 			<button type="button" id="IdentifyFacesButton">Identify Faces in Photo</button>
@@ -110,7 +133,7 @@
 	<div class="row">
 		<div class="col-md-1">&nbsp;</div>
 		<div class="col-md-4">
-		<div id="MatchFaceOutputDiv"></div>
+			<div id="MatchFaceOutputDiv"></div>
 		</div>
 	</div>
 
