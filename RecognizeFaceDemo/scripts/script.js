@@ -78,50 +78,6 @@ $(function () {
 
     };
 
-    var listAllGroups_old = function () {
-        return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
-            var listGroupApiUrl = faceApiUrl + "persongroups?top=100";
-            var output = "";
-
-            $("#GroupsList").text("Working...");
-
-            $.ajax({
-                type: "GET",
-                url: listGroupApiUrl,
-                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
-                contentType: "application/json"
-            }).done(function (data) {
-                $("#GroupsList").text("");
-                if (data.length) {
-                    data.forEach(
-                        function (item, index) {
-                            var pgLi = document.createElement("li");
-                            var text = item.personGroupId + " (" + item.name + ")";
-                            pgLi.appendChild(document.createTextNode(text));
-                            $("#GroupsList").append(pgLi);
-
-                            var pgOption = document.createElement("option");
-                            pgOption.value = item.personGroupId;
-                            pgOption.text = item.personGroupId;
-                            $("#GroupsDropDown").innerHtml = "";
-                            $("#GroupsDropDown").append(pgOption);
-                        }
-                    )
-                }
-                else {
-                    $("#GroupsList").text("No groups to list");
-                }
-                var status = "got list";
-                resolve(status);
-
-            }).fail(function (err) {
-                var status = "ERROR! " + err.responseText;
-                reject(status);
-            });
-        })
-    };
-
     var deleteAllGroups = function () {
         return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
@@ -211,6 +167,76 @@ $(function () {
                 + groupId
                 + "/persons?top=1000"
 
+            var personsList = [];
+
+            $.ajax({
+                type: "GET",
+                url: getPersonsInGroupApiUrl,
+                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey }
+            }).done(function (data) {
+                resolve(data);
+
+            }).fail(function (err) {
+                status = "Failed to get persons in group " + groupId + "<br>";
+                reject(status);
+            });
+        })
+    };
+
+    var listPersonsInGroup = async function (groupId) {
+        if (!groupId) {
+            $("#StatusLabel").text("No GroupID specified");
+        }
+        else{
+            $("#StatusLabel").text("");
+        }
+        var personsList = ""
+
+        var personDropDown = $("#PersonDropDown");
+        personDropDown.empty();
+        $("#PersonsList").html("Working...");
+
+        persons = await getPersonsInGroup(groupId);
+
+        if (persons.length) {
+            personsList = "<h3>Persons in Group " + groupId + "</h3>"
+            personsList += "<ul>"
+            persons.forEach(function (person) {
+
+                // List
+                personsList += "<li>" + person.name + " (" + person.personId + ")";
+
+                // DropDown
+                var personOption = document.createElement("option");
+                personOption.value = person.personId;
+                personOption.text = person.name;
+                personDropDown.append(personOption);
+
+
+            }, this);
+            personsList += "</ul>"
+            $("#PersonsList").html(personsList);
+
+        }
+        else {
+            $("#PersonsList").html("No persons in group " + groupId);
+        }
+
+    };
+
+    var getPersonsInGroup_old = function (groupId) {
+        return new Promise((resolve, reject) => {
+
+            if (!groupId) {
+                reject("No GroupID specified");
+            }
+
+            var subscriptionKey = getKey() || "Copy your Subscription key here";
+
+            var getPersonsInGroupApiUrl = faceApiUrl + "persongroups/"
+                + groupId
+                + "/persons?top=1000"
+
             var personsList = ""
 
             var personDropDown = $("#PersonDropDown");
@@ -241,7 +267,7 @@ $(function () {
                     resolve(personsList);
                 }
                 else {
-                    reject("No persons in group");
+                    reject("No persons in group " + groupId);
                 }
 
             }).fail(function (err) {
@@ -478,6 +504,7 @@ $(function () {
 
     //AddPersonToGroupButton
     $("#AddPersonToGroupButton").click(async function () {
+        $("#PersonsStatusLabel").text("");
         var groupId = $("#GroupsDropDown").val();
         var personName = $("#PersonNameTextBox").val();
         if (!groupId) {
@@ -491,12 +518,12 @@ $(function () {
         }
         var status = await addPersonToGroup(groupId, personName);
         $("#PersonsStatusLabel").text(status);
-        var personsList = await getPersonsInGroup(groupId);
-        $("#PersonsList").html(personsList);
+        listPersonsInGroup(groupId);
 
     });
 
     $("#GetPersonsInGroupButton").click(async function () {
+        $("#PersonsStatusLabel").text("");
         $("#PersonsList").text("Waiting...");
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
@@ -504,9 +531,7 @@ $(function () {
             $("#PersonsStatusLabel").text(status);
             return;
         }
-        var personsList = await getPersonsInGroup(groupId);
-        $("#PersonsList").html(personsList);
-        $("#PersonsStatusLabel").text("Done");
+        listPersonsInGroup(groupId);
     })
 
     $("#AddFacesToPersonButton").click(async function () {
