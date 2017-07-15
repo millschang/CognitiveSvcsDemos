@@ -356,10 +356,7 @@ $(function () {
                 headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
                 body: "{}"
             }).done(function (data) {
-                resolve(
-                    "Training status for group " + groupId + ":"
-                    + data.status
-                );
+                resolve(data.status);
             }).fail(function (err) {
                 status += "Error checking Training status for group " + groupId + "<br>"
                     + err.responseText;
@@ -542,7 +539,7 @@ $(function () {
 
     $("#AddFacesToPersonButton").click(async function () {
 
-        $("#PersonsStatusDiv").html("#Starting...<br>");
+        $("#PersonsStatusDiv").html("Adding faces...<br>");
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             status += "No Group selected";
@@ -578,25 +575,30 @@ $(function () {
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
-            $("#PersonsStatusDiv").text(status);
+            $("#TrainingStatusDiv").text(status);
             return;
         }
+        $("#TrainingStatusDiv").text("Training group...");
         var status = await trainGroup(groupId);
 
-        $("#PersonsStatusDiv").text(status);
+        $("#TrainingStatusDiv").html("Training started.<br>" + status);
     })
 
     // CheckTrainingStatusButton
     $("#CheckTrainingStatusButton").click(async function () {
+        $("#TrainingStatusDiv").text("Checking training status...");
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             var status = "No GroupID specified";
-            $("#StatusLabel").text(status);
+            $("#TrainingStatusDiv").text(status);
             return;
         }
 
         var status = await checkTrainingStatus(groupId);
-        $("#PersonsStatusDiv").text(status);
+        $("#TrainingStatusDiv").text(
+            "Training status for group " + groupId + ": "
+            + status
+        );
     })
 
     // IdentifyFacesButton
