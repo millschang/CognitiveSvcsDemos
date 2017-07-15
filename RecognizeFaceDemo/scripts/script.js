@@ -547,6 +547,10 @@ $(function () {
         );
     })
 
+    $("#TestPhoto").change(function () {
+        displaySelectedTestImage(this);
+    });
+
     // IdentifyFacesButton
     $("#IdentifyFacesButton").click(async function () {
 
@@ -571,30 +575,41 @@ $(function () {
             // At least 1 file selected. Test it
             var file = files[0];
 
+            $("#MatchFaceSummaryDiv").html("");
             $("#MatchFaceOutputDiv").html("Detecting faces...");
             var faceIds = await detectFace(groupId, file);
 
             $("#MatchFaceOutputDiv").html("Getting names...");
             var faces = await identifyFaces(groupId, faceIds);
 
-            if (faces.length) {
+            var totalFacesFound = faces.length;
+            var faceMatchesFound = 0;
+            $("#MatchFaceSummaryDiv").html(
+                totalFacesFound + " face(s) detected; "
+            )
+
+            if (totalFacesFound) {
                 var output = "<h3>Matching Faces</h3>";
                 $("#MatchFaceOutputDiv").html(output);
                 faces.forEach(
                     async function (foundFace, index) {
                         var bestMatch = foundFace.candidates[0];
-                        var personId = bestMatch.personId;
-                        var confidence = bestMatch.confidence;
+                        if (bestMatch) {
+                            faceMatchesFound++;
+                            var personId = bestMatch.personId;
+                            var confidence = bestMatch.confidence;
 
-                        var faceInfo = await GetFaceInfo(personId, groupId);
-
-                        // Get name of bestMatch
-                        var personName = faceInfo.name;
-                        output += "Name: " + faceInfo.name;
-
-                        output += " (Confidence: " + (confidence * 100).toFixed(2) + "%)<br>";
-                        $("#MatchFaceOutputDiv").html(output);
-
+                            var faceInfo = await GetFaceInfo(personId, groupId);
+                            // Get name of bestMatch
+                            var personName = faceInfo.name;
+                            output += "Name: " + faceInfo.name;
+                            output += " (Confidence: " + (confidence * 100).toFixed(2) + "%)<br>";
+                            $("#MatchFaceOutputDiv").html(output);
+                            $("#MatchFaceSummaryDiv").html(
+                                totalFacesFound + " face(s) detected; "
+                                + faceMatchesFound + " face(s) matched."
+                            )
+                        }
                     })
             }
         }
@@ -602,14 +617,8 @@ $(function () {
             output = "No matching faces found";
         }
 
-        $("#MatchFaceOutputDiv").html(output);
-
     })
 
-
-    $("#TestPhoto").change(function () {
-        displaySelectedTestImage(this);
-    });
 
 
     listAllGroups();
