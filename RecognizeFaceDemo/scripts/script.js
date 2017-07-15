@@ -187,7 +187,7 @@ $(function () {
         if (!groupId) {
             $("#StatusLabel").text("No GroupID specified");
         }
-        else{
+        else {
             $("#StatusLabel").text("");
         }
         var personsList = ""
@@ -298,9 +298,9 @@ $(function () {
                 data: face,
                 processData: false
             }).done(function (data) {
-                var status 
+                var status
                     = "Added face " + data.persistedFaceId
-                    + " to GroupId=" + groupId 
+                    + " to GroupId=" + groupId
                     + ", PersonId=" + personId;
                 resolve(status);
             }).fail(function (err) {
@@ -395,9 +395,9 @@ $(function () {
                 if (data.length) {
                     data.forEach(
                         function (foundFace, index) {
-                            if (foundFace.candidates.length==0){
-                                resolve ("No match found");
-                               
+                            if (foundFace.candidates.length == 0) {
+                                resolve("No match found");
+
                             }
                             var bestMatch = foundFace.candidates[0];
                             var personId = bestMatch.personId;
@@ -541,6 +541,8 @@ $(function () {
     })
 
     $("#AddFacesToPersonButton").click(async function () {
+
+        $("#PersonsStatusDiv").html("#Starting...<br>");
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
             status += "No Group selected";
@@ -561,11 +563,13 @@ $(function () {
                 status += "<br>"
                 $("#PersonsStatusDiv").html(status);
             }
-            status+= "<div>Complete!<br>" 
+            status += "<div>Complete!<br>"
                 + files.length
-                + " faces added.</div>"; 
+                + " faces added.</div>";
             $("#PersonsStatusDiv").html(status);
-            
+        }
+        else {
+            $("#PersonsStatusDiv").html("No files to add.");
         }
     })
 
@@ -621,6 +625,23 @@ $(function () {
 
         }
     })
+
+    function readIMG(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#TestFaceImage').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#TestPhoto").change(function () {
+        readIMG(this);
+    });
+
 
     listAllGroups();
 
