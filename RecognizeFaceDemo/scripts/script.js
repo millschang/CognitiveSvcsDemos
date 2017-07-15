@@ -224,61 +224,6 @@ $(function () {
 
     };
 
-    var getPersonsInGroup_old = function (groupId) {
-        return new Promise((resolve, reject) => {
-
-            if (!groupId) {
-                reject("No GroupID specified");
-            }
-
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
-
-            var getPersonsInGroupApiUrl = faceApiUrl + "persongroups/"
-                + groupId
-                + "/persons?top=1000"
-
-            var personsList = ""
-
-            var personDropDown = $("#PersonDropDown");
-            personDropDown.innerHtml = "";
-
-            $.ajax({
-                type: "GET",
-                url: getPersonsInGroupApiUrl,
-                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey }
-            }).done(function (data) {
-                if (data.length) {
-                    personsList = "<h3>Persons in Group " + groupId + "</h3>"
-                    personsList += "<ul>"
-                    data.forEach(function (person) {
-
-                        // List
-                        personsList += "<li>" + person.name + " (" + person.personId + ")";
-
-                        // DropDown
-                        var personOption = document.createElement("option");
-                        personOption.value = person.personId;
-                        personOption.text = person.name;
-                        personDropDown.append(personOption);
-
-
-                    }, this);
-                    personsList += "</ul>"
-                    resolve(personsList);
-                }
-                else {
-                    reject("No persons in group " + groupId);
-                }
-
-            }).fail(function (err) {
-                status += "Failed to get persons in group " + groupId + "<br>";
-                $("#StatusLabel").html(status);
-                return status;
-            });
-        })
-    };
-
-
     var addFaceToPerson = function (personId, groupId, face) {
 
         return new Promise((resolve, reject) => {
@@ -365,6 +310,19 @@ $(function () {
         })
     };
 
+    function displaySelectedTestImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#TestFaceImage').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            $("#MatchFaceOutputDiv").html("");
+        }
+    }
+
     var identifyFaces = function (groupId, faceIds) {
 
         return new Promise((resolve, reject) => {
@@ -388,42 +346,30 @@ $(function () {
                 data: body,
                 processData: false
             }).done(function (data) {
-                var output = "<h3>Matching faces</h3>"
-                if (data.length) {
-                    data.forEach(
-                        function (foundFace, index) {
-                            if (foundFace.candidates.length == 0) {
-                                resolve("No match found");
+                resolve(data);
+            }).fail(function (err) {
+                var status = "ERROR! " + err.responseText;
+                reject(status);
+            });
+        })
+    };
 
-                            }
-                            var bestMatch = foundFace.candidates[0];
-                            var personId = bestMatch.personId;
-                            var confidence = bestMatch.confidence;
+    var GetFaceInfo = function (personId, groupId) {
+        return new Promise((resolve, reject) => {
 
-                            // Get name of bestMatch
-                            var getPersonApiUrl = faceApiUrl + "persongroups/"
-                                + groupId
-                                + "/persons/"
-                                + personId;
-                            $.ajax({
-                                type: "GET",
-                                url: getPersonApiUrl,
-                                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
-                                contentType: "application/json",
-                                processData: false
-                            }).done(function (data) {
-                                var personName = data.name;
-                                output += "Name: " + personName;
-                                output += " (Confidence: " + (confidence * 100).toFixed(2) + "%)<br>";
-                                resolve(output);
-                            })
-                        }
-                    )
-                }
-                else {
-                    reject("No matching faces found");
-                }
-
+            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            var getPersonApiUrl = faceApiUrl + "persongroups/"
+                + groupId
+                + "/persons/"
+                + personId;
+            $.ajax({
+                type: "GET",
+                url: getPersonApiUrl,
+                headers: { "Ocp-Apim-Subscription-Key": subscriptionKey },
+                contentType: "application/json",
+                processData: false
+            }).done(function (data) {
+                resolve(data);
             }).fail(function (err) {
                 var status = "ERROR! " + err.responseText;
                 reject(status);
@@ -454,10 +400,10 @@ $(function () {
                     data.forEach(
                         function (face, index) {
                             var faceId = face.faceId;
-                            if (index > 1) {
-                                faceId += ",";
-                            }
                             faceIds += '"' + faceId + '"';
+                            if (index < data.length) {
+                                faceIds += ",";
+                            }
                         }
                     )
                     resolve(faceIds);
@@ -613,37 +559,53 @@ $(function () {
         }
 
         var fileSelector = $("#TestPhoto");
-        
-        if (!fileSelector[0].files.length){
+
+        if (!fileSelector[0].files.length) {
             $("#MatchFaceOutputDiv").html("No photo selected.");
             return;
         }
+
         var files = fileSelector[0].files;
 
         if (files) {
             // At least 1 file selected. Test it
             var file = files[0];
 
+            $("#MatchFaceOutputDiv").html("Detecting faces...");
             var faceIds = await detectFace(groupId, file);
-            var output = await identifyFaces(groupId, faceIds);
 
-            $("#MatchFaceOutputDiv").html(output);
+            $("#MatchFaceOutputDiv").html("Getting names...");
+            var faces = await identifyFaces(groupId, faceIds);
 
+            if (faces.length) {
+                var output = "<h3>Matching Faces</h3>";
+                $("#MatchFaceOutputDiv").html(output);
+                faces.forEach(
+                    async function (foundFace, index) {
+                        var bestMatch = foundFace.candidates[0];
+                        var personId = bestMatch.personId;
+                        var confidence = bestMatch.confidence;
+
+                        var faceInfo = await GetFaceInfo(personId, groupId);
+
+                        // Get name of bestMatch
+                        var personName = faceInfo.name;
+                        output += "Name: " + faceInfo.name;
+
+                        output += " (Confidence: " + (confidence * 100).toFixed(2) + "%)<br>";
+                        $("#MatchFaceOutputDiv").html(output);
+
+                    })
+            }
         }
+        else {
+            output = "No matching faces found";
+        }
+
+        $("#MatchFaceOutputDiv").html(output);
+
     })
 
-    function displaySelectedTestImage(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#TestFaceImage').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-            $("#MatchFaceOutputDiv").html("");
-        }
-    }
 
     $("#TestPhoto").change(function () {
         displaySelectedTestImage(this);
