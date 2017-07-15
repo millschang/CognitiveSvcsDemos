@@ -626,7 +626,7 @@ $(function () {
         }
     })
 
-    function readIMG(input) {
+    function displaySelectedTestImage(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
@@ -635,11 +635,12 @@ $(function () {
             }
 
             reader.readAsDataURL(input.files[0]);
+            $("#MatchFaceOutputDiv").html("");
         }
     }
 
     $("#TestPhoto").change(function () {
-        readIMG(this);
+        displaySelectedTestImage(this);
     });
 
 
