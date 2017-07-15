@@ -608,14 +608,18 @@ $(function () {
 
         var groupId = $("#GroupsDropDown").val();
         if (!groupId) {
-            status += "No Group selected";
+            $("#MatchFaceOutputDiv").html("No Group selected.");
             return;
         }
 
-        var groupId = $("#GroupsDropDown").val();
-
         var fileSelector = $("#TestPhoto");
+        
+        if (!fileSelector[0].files.length){
+            $("#MatchFaceOutputDiv").html("No photo selected.");
+            return;
+        }
         var files = fileSelector[0].files;
+
         if (files) {
             // At least 1 file selected. Test it
             var file = files[0];
