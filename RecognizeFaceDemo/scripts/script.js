@@ -325,13 +325,28 @@ $(function () {
         }
     }
 
-    var identifyFaces = function (groupId, faceIds) {
+    var identifyFaces = function (groupId, faces) {
 
         return new Promise((resolve, reject) => {
             var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             // https://westus.api.cognitive.microsoft.com/face/v1.0/identify
             var identifyApiUrl = faceApiUrl + "identify";
+
+            // Create comma-delimited list of faceIds
+            var faceId = "";
+            var faceIds = "";
+            var faceCounter = 0;
+            faces.forEach(function (face, index) {
+                faceCounter++;
+                var faceId = face.faceId;
+                console.log(faceId);
+                faceIds += '"' + faceId + '"';
+                if (faceCounter < faces.length) {
+                    faceIds += ",";
+                }
+            }, this);
+
 
             var body = '{'
                 + '"personGroupId":"' + groupId + '",'
@@ -582,25 +597,26 @@ $(function () {
             $("#MatchFaceOutputDiv").html("Detecting faces...");
             var facesFoundArray = await detectFace(groupId, file);
 
+            console.log (facesFoundArray);
+            // var faceIds = "";
+            // var faceCounter = 0;
+            // facesFoundArray.forEach(await function (face, index) {
+            //     faceCounter++;
+            //     var faceId = face.faceId;
+            //     console.log(faceId);
+            //     faceIds += '"' + faceId + '"';
+            //     if (faceCounter < facesFoundArray.length) {
+            //         faceIds += ",";
+            //     }
+            // }, this);
+
+            // console.log(faceIds);
+
             // TODO: This array includes a FaceRectangle.
             // Use it to place a label on the face
-            console.log (facesFoundArray);
-            var faceIds = "";
-            var faceCounter = 0;
-            facesFoundArray.forEach(await function (face, index) {
-                faceCounter++;
-                var faceId = face.faceId;
-                console.log(faceId);
-                faceIds += '"' + faceId + '"';
-                if (faceCounter < facesFoundArray.length) {
-                    faceIds += ",";
-                }
-            }, this);
-
-            console.log(faceIds);
-
             $("#MatchFaceOutputDiv").html("Getting names...");
-            var faces = await identifyFaces(groupId, faceIds);
+            var faces = await identifyFaces(groupId, facesFoundArray);
+            // var faces = await identifyFaces(groupId, faceIds);
 
             var totalFacesFound = faces.length;
             var faceMatchesFound = 0;
