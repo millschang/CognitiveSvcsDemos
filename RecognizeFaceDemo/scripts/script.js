@@ -567,6 +567,8 @@ $(function () {
 
     $("#TestPhoto").change(function () {
         displaySelectedTestImage(this);
+        $(".FaceLabel").html("");
+        $(".FaceLabel").css("display", "none");
     });
 
     // IdentifyFacesButton
@@ -584,6 +586,8 @@ $(function () {
 
         if (!fileSelector[0].files.length) {
             $("#MatchFaceOutputDiv").html("No photo selected.");
+            $(".FaceLabel").html("");
+            $(".FaceLabel").css("display", "none");
             return;
         }
 
@@ -627,6 +631,10 @@ $(function () {
             if (totalFacesFound) {
                 var output = "<h3>Matching Faces</h3>";
                 $("#MatchFaceOutputDiv").html(output);
+                faceLabels = $(".FaceLabel");
+                faceLabels.html("");
+                faceLabels.css("display", "none");
+                var faceNumber = 0;
                 faces.forEach(
                     async function (foundFace, index) {
                         var bestMatch = foundFace.candidates[0];
@@ -634,6 +642,16 @@ $(function () {
                             faceMatchesFound++;
                             var personId = bestMatch.personId;
                             var confidence = bestMatch.confidence;
+
+                            // Get rectangle from original array
+                            var rectangle;
+                            var matchingFace = facesFoundArray.filter(function ( f ) {
+                                return f.faceId === foundFace.faceId;
+                            })[0];
+                            if (matchingFace){
+                                rectangle = matchingFace.faceRectangle;
+                            }
+
 
                             var faceInfo = await GetFaceInfo(personId, groupId);
                             // Get name of bestMatch
@@ -645,6 +663,15 @@ $(function () {
                                 totalFacesFound + " face(s) detected; "
                                 + faceMatchesFound + " face(s) matched."
                             )
+
+                            // Display name on image
+                            var faceLabel = faceLabels[faceNumber];
+                            faceLabel.innerHTML = personName;
+                            faceLabel.style.top = rectangle.top; //.css("top", rectangle.top);
+                            faceLabel.style.left = rectangle.left; //.css("left", rectangle.left);
+                            faceLabel.style.display = "block"; //.css("display", "block");
+                            faceNumber++;
+                        
                         }
                     })
             }
