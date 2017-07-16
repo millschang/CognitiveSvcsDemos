@@ -320,6 +320,8 @@ $(function () {
 
             reader.readAsDataURL(input.files[0]);
             $("#MatchFaceOutputDiv").html("");
+            $("#MatchFaceSummaryDiv").html("");
+
         }
     }
 
@@ -396,17 +398,18 @@ $(function () {
                 processData: false
             }).done(function (data) {
                 if (data.length) {
-                    var faceIds = "";
-                    data.forEach(
-                        function (face, index) {
-                            var faceId = face.faceId;
-                            faceIds += '"' + faceId + '"';
-                            if (index < data.length) {
-                                faceIds += ",";
-                            }
-                        }
-                    )
-                    resolve(faceIds);
+                    resolve(data);
+                    // var faceIds = "";
+                    // data.forEach(
+                    //     function (face, index) {
+                    //         var faceId = face.faceId;
+                    //         faceIds += '"' + faceId + '"';
+                    //         if (index < data.length) {
+                    //             faceIds += ",";
+                    //         }
+                    //     }
+                    // )
+                    // resolve(faceIds);
                 }
 
             }).fail(function (err) {
@@ -577,7 +580,24 @@ $(function () {
 
             $("#MatchFaceSummaryDiv").html("");
             $("#MatchFaceOutputDiv").html("Detecting faces...");
-            var faceIds = await detectFace(groupId, file);
+            var facesFoundArray = await detectFace(groupId, file);
+
+            // TODO: This array includes a FaceRectangle.
+            // Use it to place a label on the face
+            console.log (facesFoundArray);
+            var faceIds = "";
+            var faceCounter = 0;
+            facesFoundArray.forEach(await function (face, index) {
+                faceCounter++;
+                var faceId = face.faceId;
+                console.log(faceId);
+                faceIds += '"' + faceId + '"';
+                if (faceCounter < facesFoundArray.length) {
+                    faceIds += ",";
+                }
+            }, this);
+
+            console.log(faceIds);
 
             $("#MatchFaceOutputDiv").html("Getting names...");
             var faces = await identifyFaces(groupId, faceIds);
