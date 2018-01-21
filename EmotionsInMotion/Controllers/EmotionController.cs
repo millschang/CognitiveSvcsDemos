@@ -21,6 +21,7 @@ namespace EmotionsInMotion.Controllers
         {
 
             var webSvcUrl = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
+            //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
             // TODO: Replace the EmotionApiSubscriptionKey value in Web.config with your key
             string emotionsKey = ConfigurationManager.AppSettings["EmotionApiSubscriptionKey"];
             if (emotionsKey == null)

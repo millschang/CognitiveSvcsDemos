@@ -8,7 +8,6 @@
 
 
     var getFaceInfo = function () {
-        //var subscriptionKey = "cd529ca0a97f48b8a1f3bc36ecd73600";
         var imageUrl = $("#imageUrlTextbox").val();
         webSvcUrl = "api/face";
 

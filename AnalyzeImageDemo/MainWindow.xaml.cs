@@ -34,8 +34,9 @@ namespace AnalyzeImageDemo
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", computerVisionKey);
             string requestParameters = "visualFeatures=Categories,Description,Adult,Color,Faces,ImageType,Tags&language=en";
-            string uri = "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + requestParameters;
-
+            string uri = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + requestParameters;
+            //string uri = "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + requestParameters;
+            
             var imageUrl = ImageUrlComboBox.SelectedValue.ToString();
 
             HttpResponseMessage response;

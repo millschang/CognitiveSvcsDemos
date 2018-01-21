@@ -19,7 +19,8 @@ namespace FaceApiProtectKeyDemo.Controllers
 
         private static IEnumerable<Face> GetFaceData(string imageUrl)
         {
-            var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
 
             // TODO: Replace FaceApiSubscriptionKey value in Web.config with yor API key
             string faceKey = ConfigurationManager.AppSettings["FaceApiSubscriptionKey"];
@@ -39,7 +40,7 @@ namespace FaceApiProtectKeyDemo.Controllers
 
                 streamWriter.Write(json);
                 streamWriter.Flush();
-                streamWriter.Close();
+                streamWriter.Close(); 
 
                 var httpResponse = (HttpWebResponse)Request.GetResponse();
 
@@ -50,7 +51,7 @@ namespace FaceApiProtectKeyDemo.Controllers
                 }
                 httpResponse.Close();
 
-                List<Face> faces = JsonConvert.DeserializeObject<List<Face>>(result);
+                    List<Face> faces = JsonConvert.DeserializeObject<List<Face>>(result);
                 return faces;
             }
         }

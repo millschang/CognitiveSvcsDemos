@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamEmotionDemo"
+             x:Class="XamEmotionDemo.MainPage">
+
+  <StackLayout Orientation="Vertical">
+    <Label Text="Analyze Emotions"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+    <Label x:Name="ImageUrlLabel" Text=""></Label>
+    <Image 
+      BindingContext="{x:Reference Name=ImageUrlLabel}" 
+      Source="{Binding Path=Text}">
+    </Image>
+    <Button x:Name="GetEmotionsButton" Text="Get Emotions" Clicked="GetEmotionsButton_Clicked"></Button>
+    <Label x:Name="ResultsLabel" Text=""></Label>
+
+  </StackLayout>
+
+</ContentPage>

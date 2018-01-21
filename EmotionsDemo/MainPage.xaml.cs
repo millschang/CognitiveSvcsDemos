@@ -23,14 +23,18 @@ namespace EmotionsDemo
             // Angry girl
             ImageUrlCombobox.Items.Add("http://4.bp.blogspot.com/-b2L0jhNLbec/T5VouZK2g-I/AAAAAAAAEzY/253HyiLjxOQ/s1600/angry+face+girl+(2).jpg");
             // Sad Lebron
-            ImageUrlCombobox.Items.Add("http://www.chuggers.ca/wp-content/uploads/2013/08/lebron-sad-photo.jpg");
+            ImageUrlCombobox.Items.Add("https://windycitizensports.files.wordpress.com/2012/04/lebron-crying.jpg?w=595");
             // Happy group
             ImageUrlCombobox.Items.Add("http://hotelkappara.com/wp-content/uploads/2011/08/Happy-group-of-people.jpg");
             // Mixed group
-            ImageUrlCombobox.Items.Add("http://www.thoughtpursuits.com/wp-content/uploads/2014/03/happy-sad-face-720x340.jpg");
+            ImageUrlCombobox.Items.Add("https://thedrawshop.com/wp-content/uploads/2013/08/Emotions_faces_web.gif");
+            //ImageUrlCombobox.Items.Add("http://www.thoughtpursuits.com/wp-content/uploads/2014/03/happy-sad-face-720x340.jpg");
 
             // Kylo Ren
             ImageUrlCombobox.Items.Add("http://assets2.ignimgs.com/2016/01/08/1280-kylo-ren-adam-driverjpg-0d7084_1280w.jpg");
+
+            // Mona Lisa
+            ImageUrlCombobox.Items.Add("http://www.sott.net/image/s13/272205/full/Mona_Lisa.jpg");
         
             ImageUrlCombobox.SelectedIndex = 0;
 
@@ -38,12 +42,11 @@ namespace EmotionsDemo
 
         private void GetEmotionsButton_Click(object sender, RoutedEventArgs e)
         {
-
             string url = "";
             url = @"http://www.asianweek.com/wp-content/uploads/2008/04/dreamstimeweb_angry374345_11.jpg";
-            url = ImageUrlCombobox.SelectedValue.ToString();
+            url = ImageUrlTextbox.Text;
+            //url = ImageUrlCombobox.SelectedValue.ToString();
             GetEmotions(url);
-
         }
 
         private async void GetEmotions(string imageUrl)
@@ -51,7 +54,7 @@ namespace EmotionsDemo
             string emotionApiKey = Utilities.GetKey();
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", emotionApiKey);
-            string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize ";
+              string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
             HttpResponseMessage response;
             var json = "{'url': '" + imageUrl + "'}";
             byte[] byteData = Encoding.UTF8.GetBytes(json);
@@ -137,6 +140,7 @@ namespace EmotionsDemo
         {
             RawResultsTextblock.Text = "";
             ResultsTextblock.Text = "";
+            LikelyEmotionsTextblock.Text = "";
         }
     }
 }

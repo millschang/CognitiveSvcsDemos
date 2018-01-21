@@ -19,7 +19,8 @@ namespace EmotionsInMotion.Controllers
 
         private static IEnumerable<Face> GetFaceData(string imageUrl)
         {
-            var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
             // TODO: Replace the FaceApiSubscriptionKey value in Web.config with your key
             string subscriptionKey = ConfigurationManager.AppSettings["FaceApiSubscriptionKey"];
             if (subscriptionKey == null)

@@ -1,6 +1,7 @@
 $(function () {
 
-    const faceApiUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/";
+    const faceApiUrl = "https://southcentralus.api.cognitive.microsoft.com/face/v1.0/";
+    
 
     var createGroup = function (groupId) {
         return new Promise((resolve, reject) => {
@@ -124,7 +125,6 @@ $(function () {
 
     var addPersonToGroup = function (groupId, personName) {
         return new Promise((resolve, reject) => {
-            // https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/{personGroupId}/persons
             if (!groupId || !personName) {
                 reject("Missing info");
             }
@@ -414,17 +414,6 @@ $(function () {
             }).done(function (data) {
                 if (data.length) {
                     resolve(data);
-                    // var faceIds = "";
-                    // data.forEach(
-                    //     function (face, index) {
-                    //         var faceId = face.faceId;
-                    //         faceIds += '"' + faceId + '"';
-                    //         if (index < data.length) {
-                    //             faceIds += ",";
-                    //         }
-                    //     }
-                    // )
-                    // resolve(faceIds);
                 }
 
             }).fail(function (err) {
@@ -602,25 +591,9 @@ $(function () {
             var facesFoundArray = await detectFace(groupId, file);
 
             console.log (facesFoundArray);
-            // var faceIds = "";
-            // var faceCounter = 0;
-            // facesFoundArray.forEach(await function (face, index) {
-            //     faceCounter++;
-            //     var faceId = face.faceId;
-            //     console.log(faceId);
-            //     faceIds += '"' + faceId + '"';
-            //     if (faceCounter < facesFoundArray.length) {
-            //         faceIds += ",";
-            //     }
-            // }, this);
 
-            // console.log(faceIds);
-
-            // TODO: This array includes a FaceRectangle.
-            // Use it to place a label on the face
             $("#MatchFaceOutputDiv").html("Getting names...");
             var faces = await identifyFaces(groupId, facesFoundArray);
-            // var faces = await identifyFaces(groupId, faceIds);
 
             var totalFacesFound = faces.length;
             var faceMatchesFound = 0;

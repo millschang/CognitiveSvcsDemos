@@ -190,4 +190,3 @@ C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\qualifiers.txt
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\qualifiers.txt.intermediate
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\ProjectArchitectures.txt
-C:\development\ProjectOxfordDemos\EmotionsDemo\obj\x86\Debug\EmotionsDemo.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+AnalyzeImageDemo	WPF
+EmotionsDemo	UWP
+EmotionsInMOtion	JavaScript
+FaceDemo	JavaScript
+FaceApiProtectKeyDemo	JavaScript / Web API
+OcrDemo	MVC / JavaScript
+SentimentAnalysis	JavaScript
+SpeechToTextDemo
+ThumbNailConsole	Console App
+VerifyFaceDemo	JavaScript

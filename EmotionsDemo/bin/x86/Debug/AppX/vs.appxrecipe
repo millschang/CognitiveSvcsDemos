@@ -16,7 +16,7 @@
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
-    <RegisteredManifestChecksum>69FDFB31B5B71CACAFC235D4026E46A7BDE9B584F94FF80AC54927F3DF1F7E03</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>8698CFCE937B066A4B8A4B479023E87EC6104480F238FAE8B4B0D88DC0498B6D</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>784a6163-607f-4aa7-9400-8b8a51ef2d31_1.0.0.0_x86__1ezye1sdakv8y</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>784a6163-607f-4aa7-9400-8b8a51ef2d31_1ezye1sdakv8y!App</RegisteredUserModeAppID>
     <RegisteredPackageID>784a6163-607f-4aa7-9400-8b8a51ef2d31</RegisteredPackageID>
@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-03-19T17:46:56.145</Modified>
+      <Modified>2017-05-01T12:16:53.538</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\EmotionsDemo.exe">
       <PackagePath>entrypoint\EmotionsDemo.exe</PackagePath>
-      <Modified>2017-03-19T17:46:55.389</Modified>
+      <Modified>2017-05-01T12:16:51.772</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\dgiard\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -492,19 +492,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\EmotionsDemo.xr.xml">
       <PackagePath>EmotionsDemo.xr.xml</PackagePath>
-      <Modified>2017-03-19T17:45:30.003</Modified>
+      <Modified>2017-05-01T12:16:51.588</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2016-07-10T14:14:36.535</Modified>
+      <Modified>2017-04-26T16:26:34.113</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2017-03-19T17:46:55.922</Modified>
+      <Modified>2017-05-01T12:16:53.290</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\development\ProjectOxfordDemos\EmotionsDemo\bin\x86\Debug\Core\EmotionsDemo.exe">
       <PackagePath>EmotionsDemo.exe</PackagePath>
-      <Modified>2017-03-19T17:46:56.139</Modified>
+      <Modified>2017-05-01T12:16:53.527</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
@@ -537,27 +537,27 @@
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.24210.0</Version>
+      <Version>14.0.25019.0</Version>
       <Architecture>ARM</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.24210.0</Version>
+      <Version>14.0.25019.0</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.24210.0</Version>
+      <Version>14.0.25019.0</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.25019.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
       <MoreInfo>
       </MoreInfo>
