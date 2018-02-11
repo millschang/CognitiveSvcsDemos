@@ -54,7 +54,7 @@ namespace EmotionsDemo
             string emotionApiKey = Utilities.GetKey();
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", emotionApiKey);
-              string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
+            string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
             HttpResponseMessage response;
             var json = "{'url': '" + imageUrl + "'}";
             byte[] byteData = Encoding.UTF8.GetBytes(json);

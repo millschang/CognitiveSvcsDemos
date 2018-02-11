@@ -74,4 +74,4 @@ C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\bi
 C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\obj\Debug\FaceApiProtectKeyDemo.csprojResolveAssemblyReference.cache
 C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\obj\Debug\FaceApiProtectKeyDemo.dll
 C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\obj\Debug\FaceApiProtectKeyDemo.pdb
-C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\obj\Debug\FaceApiProtectKeyDemo.csproj.CoreCompileInputs.cache
+C:\development\ProjectOxfordDemos\FaceApiProtectKeyDemo\FaceApiProtectKeyDemo\bin\FaceApiProtectKeyDemo.dll.config
