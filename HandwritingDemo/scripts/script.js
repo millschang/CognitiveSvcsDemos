@@ -49,9 +49,11 @@ $(function () {
         }).done(function (data) {
             var headers = call.getAllResponseHeaders();
             var headersArray = headers.split(/\s+/);
+            headersArray = headersArray.map(h => h.toLowerCase());
+            //words =        words       .map(v => v.toLowerCase());
             var operationLocationUrl = "";
 
-            var operationLocationUrlIndex = headersArray.indexOf("Operation-Location:");
+            var operationLocationUrlIndex = headersArray.indexOf("operation-location:");
             if (operationLocationUrlIndex >= 0) {
                 operationLocationUrl = headersArray[operationLocationUrlIndex + 1];
             }
