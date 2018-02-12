@@ -27,7 +27,6 @@ $(function () {
             data: '{ "Url": "' + imageUrl + '" }'
         }).done(function (data) {
 
-
             if (data.length > 0) {
                 var firstFace = data[0];
                 var faceId = firstFace.faceId;
@@ -40,7 +39,7 @@ $(function () {
                 $("#Rectangle").css("top", faceTop);
                 $("#Rectangle").css("left", faceLeft);
                 $("#Rectangle").css("height", faceHeight);
-                $("#Rectangle").css("width", faceHeight);
+                $("#Rectangle").css("width", faceWidth);
                 $("#Rectangle").css("display", "block");
 
                 var faceLandmarks = firstFace.faceLandmarks;

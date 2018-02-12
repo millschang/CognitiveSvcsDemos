@@ -6,10 +6,32 @@ $(function () {
 
     showTextImage = function (url) {
         $("#SourceUrlSpan").text(url);
-        $("#TextImageFrame").attr("src", url);
+        $("#TextImage").attr("src", url);
+        //        $("#TextImageFrame").attr("src", url);
         $("#OutputDiv").text("");
     }
 
+    var drawBox = function (boundingBox) {
+
+        var topLeftX = boundingBox[0];
+        var topLeftY = boundingBox[1];
+        var topRightX = boundingBox[2];
+        var topRightY = boundingBox[3];
+        var bottomRightX = boundingBox[4];
+        var bottomRightY = boundingBox[5];
+        var bottomLeftX = boundingBox[6];
+        var bottomLeftY = boundingBox[7];
+        var height = bottomRightY - topRightY;
+        var width = topRightX - topLeftX;
+
+        var rectangleImage = $("#Rectangle");
+        rectangleImage.css("top", topLeftY+"px");
+        rectangleImage.css("left", topLeftX+"px");
+        rectangleImage.css("height", height+"px");
+        rectangleImage.css("width", width+"px");
+        rectangleImage.css("display", "block");
+        rectangleImage.css("position", "absolute");
+    }
 
     $("#GetTextFromPictureButton").click(function () {
         var outputDiv = $("#OutputDiv");
@@ -43,6 +65,11 @@ $(function () {
                     }).done(function (data) {
                         console.log(data.status);
                         if (data.status.toUpperCase() == "SUCCEEDED") {
+
+                            var wordToFindTextbox = document.getElementById("WordToFind")
+                            var wordToFind = wordToFindTextbox.value;
+                            wordToFind = wordToFind.toUpperCase().trim();
+    
                             var results = data.recognitionResult;
                             var linesOfText = results.lines;
                             outputDiv.text("");
@@ -56,7 +83,11 @@ $(function () {
                                 var words = thisLine.words;
                                 for (var w = 0; w < words.length; w++) {
                                     var thisWord = words[w];
-                                    var boundingBox = thisWord.boundingBox;
+                                    if (thisWord.text.toUpperCase().trim() == wordToFind) {
+                                        // Matching the search word. Draw a box around it.
+                                        var boundingBox = thisWord.boundingBox;
+                                        drawBox(boundingBox);
+                                    }
                                     output += thisWord.text;
                                     output += " ";
 
@@ -93,10 +124,6 @@ $(function () {
 
     $('#ImageUrlDropdown option:eq(0)').prop('selected', true);
     showTextImage($('#ImageUrlDropdown option:eq(0)').val());
+
 });
 
-var getKey = function () {
-    // TODO: Replace with your Computer Vision API key
-    return "31a68661b4dd4365994bb77acffd7076";
-    //return "f1e62401f0e140f0a777d7c68275955b";
-}
