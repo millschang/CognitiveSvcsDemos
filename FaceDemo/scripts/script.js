@@ -12,6 +12,7 @@ $(function () {
 
         var imageUrl = $("#imageUrlTextbox").val();
 
+        //var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0";
         var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
 		
 
