@@ -11,13 +11,32 @@ $(function () {
 
     }
 
+    const missingKeyErrorMsg = `<div>No key found.<br>
+        Create a script.js file with the following code:.</div>
+        <div style="color:red; padding-left: 20px;">
+        var getKey = function(){<br>
+            &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+        }
+        </div>
+        <div>where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Computer Vision API key</div>`
+    
 
     $("#GetTextFromPictureButton").click(function () {
         var outputDiv = $("#OutputDiv");
         outputDiv.text("Thinking...");
         var url = $("#ImageUrlDropdown").val();
         var language = $("#LanguageDropdown").val();
-        var computerVisionKey = getKey() || "Copy your Subscription key here";
+
+        try {
+            var computerVisionKey = getKey();
+        }
+        catch(err) {
+            outputDiv.html(missingKeyErrorMsg);
+            return;
+        }
+
+
+        // var computerVisionKey = getKey() || "Copy your Subscription key here";
         var webSvcUrl = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/ocr";
         //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/vision/v1.0/ocr";
         webSvcUrl = webSvcUrl + "?language=" + language;
@@ -65,8 +84,3 @@ $(function () {
 });
 
 
-var getKey = function () {
-    // TODO: Replace with your Computer Vision API key
-    return "31a68661b4dd4365994bb77acffd7076";
-    //return "f1e62401f0e140f0a777d7c68275955b";
-}

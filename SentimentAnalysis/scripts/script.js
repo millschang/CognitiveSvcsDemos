@@ -1,13 +1,35 @@
 $(function () {
-	
+    
+    const missingKeyErrorMsg = `
+        <div>
+            No key found.<br>
+            This demo will not work without a key.<br>
+            Create a script.js file with the following code:.
+        </div>
+        <div style="color:red; padding-left: 20px;">
+        var getKey = function(){<br>
+            &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+        }
+        </div>
+        <div>where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Face API key</div>`
+    
+    var outputDiv = $("#OutputDiv");
+    try {
+        var subscriptionKey = getKey();
+    }
+    catch(err) {
+        outputDiv.html(missingKeyErrorMsg);
+    }
+
+
 	$("#AnaylyzeButton").click(function(){
+
         var subscriptionKey = getKey() || "Copy your Subscription key here";
         var textToAnalyze = $("#TextToAnalyze").val();
 
         var webSvcUrl = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment";
         // var webSvcUrl = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment";
 
-        var outputDiv = $("#OutputDiv");
         outputDiv.text("Thinking...");
 
         $.ajax({

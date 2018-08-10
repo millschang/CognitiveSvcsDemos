@@ -4,6 +4,17 @@ $(function () {
         showTextImage(url);
     })
 
+    const missingKeyErrorMsg = `
+        <div>No key found.<br>
+        This demo will not work without a key.<br>
+        Create a script.js file with the following code:.</div>
+        <div style="color:red; padding-left: 20px;">
+        var getKey = function(){<br>
+            &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+        }
+        </div>
+        <div>where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Computer Vision API key</div>`
+    
     showTextImage = function (url) {
         $("#SourceUrlSpan").text(url);
         $("#TextImage").attr("src", url);
@@ -37,7 +48,15 @@ $(function () {
         var outputDiv = $("#OutputDiv");
         outputDiv.text("Thinking...");
         var url = $("#ImageUrlDropdown").val();
-        var computerVisionKey = getKey() || "Copy your Subscription key here";
+
+        try {
+            var computerVisionKey = getKey();
+        }
+        catch(err) {
+            outputDiv.html(missingKeyErrorMsg);
+            return;
+        }
+
         var webSvcUrl = "https://westus.api.cognitive.microsoft.com/vision/v1.0/recognizeText?handwriting=true";
         webSvcUrl = webSvcUrl;
         var call = $.ajax({

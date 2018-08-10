@@ -1,4 +1,17 @@
-var faceApi = "https://southcentralus.api.cognitive.microsoft.com/face/v1.0/";
+var faceApi = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/";
+
+const missingKeyErrorMsg = `
+<div>
+    No key found.<br>
+    This demo will not work without a key.<br>
+    Create a script.js file with the following code:.
+</div>
+<div style="color:red; padding-left: 20px;">
+var getKey = function(){<br>
+    &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+}
+</div>
+<div>where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Text Analytics API key</div>`
 
 $(function () {
     $("#Image1UrlDropdown").change(function () {
@@ -28,14 +41,20 @@ $(function () {
 
     var getFaceInfo = function () {
 
-        var subscriptionKey = getKey() || "Copy your Subscription key here";
+        var outputDiv = $("#OutputDiv");
+        try {
+            var subscriptionKey = getKey();
+        }
+        catch(err) {
+            outputDiv.html(missingKeyErrorMsg);
+            return;
+        }
 
         var image1Url = $("#Image1UrlDropdown").val();
         var image2Url = $("#Image2UrlDropdown").val();
 
         var faceDetectApiUrl = faceApi + "detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
 
-        var outputDiv = $("#OutputDiv");
         outputDiv.text("Thinking...");
 
         var outputText = "";

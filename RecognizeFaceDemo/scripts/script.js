@@ -2,11 +2,35 @@ $(function () {
 
     const faceApiUrl = "https://southcentralus.api.cognitive.microsoft.com/face/v1.0/";
     
+    const missingKeyErrorMsg = `
+        <div>
+            No key found.<br>
+            This demo will not work without a key.
+        </div>
+        <div>
+            Create a script.js file with the following code:.
+        </div>
+        <div style="color:red; padding-left: 20px;">
+            var getKey = function(){<br>
+                &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+            }
+        </div>
+        <div>
+            where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Computer Vision API key
+        </div>
+        `
+
+    try {
+        var subscriptionKey = getKey();
+    }
+    catch(err) {
+        $("#outputDiv").html(missingKeyErrorMsg);
+    }
 
     var createGroup = function (groupId) {
         return new Promise((resolve, reject) => {
 
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             var createGroupApiUrl = faceApiUrl + "persongroups/" + groupId;
 
@@ -29,7 +53,7 @@ $(function () {
 
     var getAllGroups = function () {
         return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
             var listGroupApiUrl = faceApiUrl + "persongroups?top=100";
             var output = "";
 
@@ -81,7 +105,7 @@ $(function () {
 
     var deleteAllGroups = function () {
         return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
             var getGroupApiUrl = faceApiUrl + "persongroups?top=100";
 
             $.ajax({
@@ -128,7 +152,7 @@ $(function () {
             if (!groupId || !personName) {
                 reject("Missing info");
             }
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
             var addPersonToGroupApiUrl = faceApiUrl + "persongroups/"
                 + groupId
                 + "/persons";
@@ -161,7 +185,7 @@ $(function () {
                 reject("No GroupID specified");
             }
 
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             var getPersonsInGroupApiUrl = faceApiUrl + "persongroups/"
                 + groupId
@@ -227,7 +251,7 @@ $(function () {
     var addFaceToPerson = function (personId, groupId, face) {
 
         return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             var addFacesToPersonApiUrl = faceApiUrl + "persongroups/"
                 + groupId
@@ -263,7 +287,7 @@ $(function () {
                 return;
             }
 
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
             var trainGroupApiUrl = faceApiUrl + "persongroups/"
                 + groupId
                 + "/train";
@@ -289,7 +313,7 @@ $(function () {
                 reject("No group specified");
             }
 
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             var checkTrainingStatusApiUrl = faceApiUrl + "persongroups/"
                 + groupId
@@ -328,7 +352,7 @@ $(function () {
     var identifyFaces = function (groupId, faces) {
 
         return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             // https://westus.api.cognitive.microsoft.com/face/v1.0/identify
             var identifyApiUrl = faceApiUrl + "identify";
@@ -374,7 +398,7 @@ $(function () {
     var GetFaceInfo = function (personId, groupId) {
         return new Promise((resolve, reject) => {
 
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
             var getPersonApiUrl = faceApiUrl + "persongroups/"
                 + groupId
                 + "/persons/"
@@ -397,7 +421,7 @@ $(function () {
     var detectFace = function (groupId, face) {
 
         return new Promise((resolve, reject) => {
-            var subscriptionKey = getKey() || "Copy your Subscription key here";
+            // var subscriptionKey = getKey() || "Copy your Subscription key here";
 
             // https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false
             var identifyApiUrl = faceApiUrl + "detect?returnFaceId=true";
