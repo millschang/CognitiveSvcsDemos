@@ -8,3 +8,5 @@ SentimentAnalysis	JavaScript
 SpeechToTextDemo
 ThumbNailConsole	Console App
 VerifyFaceDemo	JavaScript
+Thumbnail-NodeDemo	node.js
+AnalyzeImage-NodeDemo	node.js
