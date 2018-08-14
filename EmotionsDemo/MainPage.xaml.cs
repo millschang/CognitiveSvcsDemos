@@ -90,14 +90,14 @@ namespace EmotionsDemo
 
                     sb1.Append(string.Format("Face {0}\n", faceNumber));
                     sb1.Append("Scores:\n");
-                    sb1.Append(string.Format("Anger: {0:0.0000}\n", anger));
-                    sb1.Append(string.Format("Contempt: {0:0.0000}\n", contempt));
-                    sb1.Append(string.Format("Disgust: {0:0.0000}\n", disgust));
-                    sb1.Append(string.Format("Fear: {0:0.0000}\n", fear));
-                    sb1.Append(string.Format("Happiness: {0:0.0000}\n", happiness));
-                    sb1.Append(string.Format("Neutral: {0:0.0000}\n", neutral));
-                    sb1.Append(string.Format("Surprise: {0:0.0000}\n", surprise));
-                    sb1.Append(string.Format("Sadness: {0:0.0000}\n", sadness));
+                    sb1.Append(string.Format("Anger: {0:0.00}\n", anger));
+                    sb1.Append(string.Format("Contempt: {0:0.00}\n", contempt));
+                    sb1.Append(string.Format("Disgust: {0:0.00}\n", disgust));
+                    sb1.Append(string.Format("Fear: {0:0.00}\n", fear));
+                    sb1.Append(string.Format("Happiness: {0:0.00}\n", happiness));
+                    sb1.Append(string.Format("Neutral: {0:0.00}\n", neutral));
+                    sb1.Append(string.Format("Surprise: {0:0.00}\n", surprise));
+                    sb1.Append(string.Format("Sadness: {0:0.00}\n", sadness));
                     sb1.Append("\n");
 
                     
