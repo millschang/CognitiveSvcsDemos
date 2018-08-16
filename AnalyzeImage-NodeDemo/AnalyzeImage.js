@@ -5,7 +5,6 @@ var gk = require("./getkey");
 var imageUrl = 'http://www.nicbblog.org/wp-content/uploads/2015/09/boat.jpg';
 var caption;
 
-
 var data = JSON.stringify({
     'url': imageUrl
 });
@@ -15,7 +14,6 @@ var wsHost = 'westus.api.cognitive.microsoft.com';
 var wsPath = '/vision/v2.0/analyze?visualFeatures=Description';
 
 var key = gk.getKey();
-//var key = '61810ac22fa540dfb33465e4c61c0ee6';
 
 var options = {
     host: wsHost,
@@ -24,7 +22,7 @@ var options = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
-        'Ocp-Apim-Subscription-Key': '61810ac22fa540dfb33465e4c61c0ee6',
+        'Ocp-Apim-Subscription-Key': key,
         'Content-Length': data.length
     }
 };
