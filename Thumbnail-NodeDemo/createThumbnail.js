@@ -5,9 +5,10 @@ var gk = require("./getkey");
 var originalImageUrl = '';
 //originalImageUrl = 'https://giard.smugmug.com/Travel/Sweden-2015/i-ncF6hXw/0/L/IMG_1560-L.jpg';
 originalImageUrl = 'http://davidgiard.com/content/Giard/_DGInAppleton.png';
-var tnWidth = 200;
-var tnHeight = 200;
+const tnWidth = 200;
+const tnHeight = 200;
 var thumbnailImageUrl = '';
+const outputFolder = '_thumbnails';
 
 var data = JSON.stringify({
     'url': originalImageUrl
@@ -39,7 +40,7 @@ var req = http.request(options, function (res) {
     });
     res.on('end', function () {
         var fileName = "tn_" + Math.floor(Math.random() * 1000) + ".jpg";
-        thumbnailImageUrl = "_thumbnails/" + fileName;
+        thumbnailImageUrl = outputFolder + fileName;
 
         fs.writeFile(thumbnailImageUrl, msg, 'binary', function (err) {
             if (err) return console.log(err);

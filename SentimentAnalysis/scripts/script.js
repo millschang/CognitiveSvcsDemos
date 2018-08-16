@@ -28,7 +28,6 @@ $(function () {
         var textToAnalyze = $("#TextToAnalyze").val();
 
         var webSvcUrl = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment";
-        // var webSvcUrl = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment";
 
         outputDiv.text("Thinking...");
 

@@ -13,6 +13,7 @@ The following steps are required to run this sample code:
 1. Sign up for an Azure account
 2. Create a Computer Vision API key
 3. Create the getkey.js file
+4. Create _thumbnails folder
 
 Details:
 
@@ -36,6 +37,10 @@ To protect the API key, I did not check in the getkey.js file. You will need to 
 ```
 
 where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your API key.
+
+#### Create _thumbnails folder
+
+By default, the thumbnail images are stored in a subfolder named "_thumbnails". Create this folder before running the code.
 
 ### Run the sample.
 
