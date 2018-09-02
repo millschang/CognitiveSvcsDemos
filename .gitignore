@@ -244,4 +244,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-*.config
+# Visual Studio Config files
+**/*.config
