@@ -43,6 +43,9 @@ $(function () {
             data: '{ "Url": "' + imageUrl + '" }'
         }).done(function (data) {
 
+            var returnText = JSON.stringify(data);
+            $("#RawJsonDiv").text(returnText);
+
             if (data.length > 0) {
                 var firstFace = data[0];
                 var faceId = firstFace.faceId;
