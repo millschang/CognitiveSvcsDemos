@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.ProjectOxford.Vision;
-using Microsoft.ProjectOxford.Vision.Contract;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using AnalyzeImageDemo.models;
 
 namespace AnalyzeImageDemo
 {
@@ -37,41 +28,54 @@ namespace AnalyzeImageDemo
         private async void AnalyzeButton_Click(object sender, RoutedEventArgs e)
         {
 
-            string subscriptionKey = "e4df9eb47d0a40a4b43e627483ed5bb0";
-            VisionServiceClient visionServiceClient = new VisionServiceClient(subscriptionKey);
+            CaptionTextBox.Text = "Analyzing...";
 
-            //string imageUrl = "http://imguol.com/2013/03/14/christopher-power-1363276244301_400x500.jpg";
-            //string[] visualFeatures = null;
-            var visualFeaturesList = new List<VisualFeature>();
-            visualFeaturesList.Add(VisualFeature.Adult);
-            visualFeaturesList.Add(VisualFeature.Categories);
-            visualFeaturesList.Add(VisualFeature.Description);
-            visualFeaturesList.Add(VisualFeature.Color);
-            visualFeaturesList.Add(VisualFeature.Faces);
-            visualFeaturesList.Add(VisualFeature.ImageType);
-            visualFeaturesList.Add(VisualFeature.Tags);
-
-
-
+            string computerVisionKey = Utilities.GetKey();
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", computerVisionKey);
+            string requestParameters = "visualFeatures=Categories,Description,Adult,Color,Faces,ImageType,Tags&language=en";
+            string uri = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + requestParameters;
+            //string uri = "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + requestParameters;
+            
             var imageUrl = ImageUrlComboBox.SelectedValue.ToString();
 
-            AnalysisResult analysisResult = await visionServiceClient.AnalyzeImageAsync(imageUrl, visualFeaturesList);
+            HttpResponseMessage response;
+            var json = "{'url': '" + imageUrl +"'}";
+            byte[] byteData = Encoding.UTF8.GetBytes(json);
 
-            CaptionTextBox.Text = analysisResult.Description.Captions[0].Text;
-            string[] tags = analysisResult.Description.Tags;
-            TagsListBox.Items.Clear();
-            foreach (string tag in tags)
+            using (var content = new ByteArrayContent(byteData))
             {
-                TagsListBox.Items.Add(tag);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response = await client.PostAsync(uri, content);
             }
 
-            var racyScore = analysisResult.Adult.RacyScore;
-            ShockingImage.Visibility = Visibility.Collapsed;
-            if (racyScore > 0.3)
+            if (response.IsSuccessStatusCode)
             {
-                ShockingImage.Visibility = Visibility.Visible;
-            }
+                var data = await response.Content.ReadAsStringAsync();
 
+                var results = JsonConvert.DeserializeObject<ImageAnalysisResults>(data);
+
+                var caption = results.Description.Captions[0].Text;
+                CaptionTextBox.Text = caption;
+                var tags = results.Description.Tags;
+                foreach (var tag in tags)
+                {
+                    TagsListBox.Items.Add(tag);
+                }
+
+                var racyScore = results.Adult.RacyScore;
+                ShockingImage.Visibility = Visibility.Collapsed;
+                if (racyScore > 0.3)
+                {
+                    ShockingImage.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                var error = response.StatusCode;
+                var errorMsg = response.ReasonPhrase;
+                CaptionTextBox.Text = "Error: " + error.ToString() + ": " + errorMsg;
+            }
 
         }
 

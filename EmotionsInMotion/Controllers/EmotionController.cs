@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using EmotionsInMotion.Models;
 using Newtonsoft.Json;
@@ -13,18 +11,6 @@ namespace EmotionsInMotion.Controllers
 {
     public class EmotionController : ApiController
     {
-        // GET: api/Emotion
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Emotion/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Emotion
         public List<Emotion> Post([FromBody]string imageUrl)
         {
@@ -34,16 +20,18 @@ namespace EmotionsInMotion.Controllers
         private List<Emotion> GetEmotionData(string imageUrl)
         {
 
-            var webSvcUrl = "https://api.projectoxford.ai/emotion/v1.0/recognize";
-            string subscriptionKey = ConfigurationManager.AppSettings["EmotionApiSubscriptionKey"];
-            if (subscriptionKey == null)
+            var webSvcUrl = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
+            //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize";
+            // TODO: Replace the EmotionApiSubscriptionKey value in Web.config with your key
+            string emotionsKey = ConfigurationManager.AppSettings["EmotionApiSubscriptionKey"];
+            if (emotionsKey == null)
             {
                 throw new ConfigurationErrorsException("Web Service is missing Subscription Key");
             }
             WebRequest Request = WebRequest.Create(webSvcUrl);
             Request.Method = "POST";
             Request.ContentType = "application / json";
-            Request.Headers.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+            Request.Headers.Add("Ocp-Apim-Subscription-Key", emotionsKey);
             using (var streamWriter = new StreamWriter(Request.GetRequestStream()))
             {
                 string json = "{"
@@ -79,5 +67,18 @@ namespace EmotionsInMotion.Controllers
         {
             throw new Exception("DELETE not supported");
         }
+
+        // GET: api/Emotion
+        public IEnumerable<string> Get()
+        {
+            throw new Exception("GET not supported");
+        }
+
+        // GET: api/Emotion/5
+        public string Get(int id)
+        {
+            throw new Exception("GET not supported");
+        }
+
     }
 }

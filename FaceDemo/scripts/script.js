@@ -6,16 +6,33 @@ $(function () {
         }
     };
 
-
+    const missingKeyErrorMsg = `<div>No key found.<br>
+        This demo will not work without a key.<br>
+        Create a script.js file with the following code:.</div>
+        <div style="color:red; padding-left: 20px;">
+        var getKey = function(){<br>
+            &nbsp; &nbsp; return "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";<br>
+        }
+        </div>
+        <div>where xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx is your Azure Face API key</div>`
+    
     var getFaceInfo = function () {
-        var subscriptionKey = getKey() || "Copy your Subscription key here";
-
-        var imageUrl = $("#imageUrlTextbox").val();
-
-        var webSvcUrl = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
 
         var outputDiv = $("#OutputDiv");
         outputDiv.text("Thinking...");
+
+        try {
+            var subscriptionKey = getKey();
+        }
+        catch(err) {
+            outputDiv.html(missingKeyErrorMsg);
+            return;
+        }
+
+        var imageUrl = $("#imageUrlTextbox").val();
+
+        var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+		
 
 
         $.ajax({
@@ -26,6 +43,8 @@ $(function () {
             data: '{ "Url": "' + imageUrl + '" }'
         }).done(function (data) {
 
+            var returnText = JSON.stringify(data);
+            $("#RawJsonDiv").text(returnText);
 
             if (data.length > 0) {
                 var firstFace = data[0];
@@ -39,7 +58,7 @@ $(function () {
                 $("#Rectangle").css("top", faceTop);
                 $("#Rectangle").css("left", faceLeft);
                 $("#Rectangle").css("height", faceHeight);
-                $("#Rectangle").css("width", faceHeight);
+                $("#Rectangle").css("width", faceWidth);
                 $("#Rectangle").css("display", "block");
 
                 var faceLandmarks = firstFace.faceLandmarks;

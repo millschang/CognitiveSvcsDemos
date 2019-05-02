@@ -1,30 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using FaceApiProtectKeyDemo.Models;
 using Newtonsoft.Json;
+using System;
 
 namespace FaceApiProtectKeyDemo.Controllers
 {
     public class FaceController : ApiController
     {
-        // GET: api/Face
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Face/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Face
         public IEnumerable<Face> Post([FromBody]string imageUrl)
         {
@@ -33,16 +19,19 @@ namespace FaceApiProtectKeyDemo.Controllers
 
         private static IEnumerable<Face> GetFaceData(string imageUrl)
         {
-            var webSvcUrl = "https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
-            string subscriptionKey = ConfigurationManager.AppSettings["SubscriptionKey"];
-            if (subscriptionKey == null)
+            var webSvcUrl = "https://eastus2.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+            //var webSvcUrl = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=true&returnFaceAttributes=age,gender,smile,facialHair,headPose,glasses";
+
+            // TODO: Replace FaceApiSubscriptionKey value in Web.config with yor API key
+            string faceKey = ConfigurationManager.AppSettings["FaceApiSubscriptionKey"];
+            if (faceKey == null)
             {
                 throw new ConfigurationErrorsException("Web Service is missing Subscription Key");
             }
             WebRequest Request = WebRequest.Create(webSvcUrl);
             Request.Method = "POST";
             Request.ContentType = "application / json";
-            Request.Headers.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+            Request.Headers.Add("Ocp-Apim-Subscription-Key", faceKey);
             using (var streamWriter = new StreamWriter(Request.GetRequestStream()))
             {
                 string json = "{"
@@ -51,7 +40,7 @@ namespace FaceApiProtectKeyDemo.Controllers
 
                 streamWriter.Write(json);
                 streamWriter.Flush();
-                streamWriter.Close();
+                streamWriter.Close(); 
 
                 var httpResponse = (HttpWebResponse)Request.GetResponse();
 
@@ -62,7 +51,7 @@ namespace FaceApiProtectKeyDemo.Controllers
                 }
                 httpResponse.Close();
 
-                List<Face> faces = JsonConvert.DeserializeObject<List<Face>>(result);
+                    List<Face> faces = JsonConvert.DeserializeObject<List<Face>>(result);
                 return faces;
             }
         }
@@ -70,11 +59,26 @@ namespace FaceApiProtectKeyDemo.Controllers
         // PUT: api/Face/5
         public void Put(int id, [FromBody]string value)
         {
+            throw new Exception("PUT not supported");
         }
 
         // DELETE: api/Face/5
         public void Delete(int id)
         {
+            throw new Exception("DELETE not supported");
         }
+
+        // GET: api/Emotion
+        public IEnumerable<string> Get()
+        {
+            throw new Exception("GET not supported");
+        }
+
+        // GET: api/Emotion/5
+        public string Get(int id)
+        {
+            throw new Exception("GET not supported");
+        }
+
     }
 }

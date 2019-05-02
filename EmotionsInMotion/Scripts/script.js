@@ -265,14 +265,15 @@ $(function () {
 
     $(".img-thumbnail").click(function () {
         var image = $(this).attr("data-photo");
-        var imageUrl = "http://emotionsinmotion.azurewebsites.net/samples/" + image;
+        var imageUrl = "/samples/" + image;
+        //var imageUrl = "http://emotionsinmotion.azurewebsites.net/samples/" + image;
         $("#imageUrlTextbox").val(imageUrl);
         showImage();
         getFaceInfo();
     })
     
-    $("#imageUrlTextbox").val("http://emotionsinmotion.azurewebsites.net/images/david.jpg");
-    showImage();
+    //$("#imageUrlTextbox").val("http://emotionsinmotion.azurewebsites.net/images/david.jpg");
+    //showImage();
     getFaceInfo();
 
 

@@ -1,0 +1,133 @@
+<html>
+
+<head>
+	<title>Face Verification Demo</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/site.css">
+	<script src="scripts/jquery-1.10.2.min.js"></script>
+	<script src="scripts/script.js"></script>
+	<script src="scripts/getkey.js"></script>
+</head>
+
+<body>
+	<div class="jumbotron">
+		<h1>Microsoft Cognitive Services</h1>
+		<h2>Face Verifcation Demo</h2>
+	</div>
+
+	<div class="row">
+		<div class="col-md-1">
+			<div>Image 1</div>
+		</div>
+		<div class="col-md-1">
+			<select id="Image1UrlDropdown">
+                <option value="https://photos.smugmug.com/Family/Giard-family-history/i-7pBzzqP/0/2ef4d8ab/S/Giard_016-S.jpg">
+				1962
+				</option>
+                <option value="https://photos.smugmug.com/Other/Davids-High-School-Years/i-z7CFFM2/0/9427085a/S/DavidGiard1979-S.jpg">
+				1978
+				</option>
+                <option value="https://photos.smugmug.com/Other/John-and-Melissa-Marlow/i-ZG3TRxq/0/2647424a/S/DS050701234250.tif-S.jpg">
+				1989
+				</option>
+                <option value="https://photos.smugmug.com/Other/Herrick-party-1991/i-487dqsG/0/b0f27549/S/DS050706135604.tif-S.jpg">
+				1991
+				</option>
+                <option value="https://photos.smugmug.com/Family/1996-Christmas-Card-Photos/i-pTrRBfw/0/e74f1245/S/DS050804225605.tif-S.jpg">
+				1995
+				</option>
+                <option value="https://photos.smugmug.com/Travel/Lexington-MI-2007/i-5k7WQ64/0/20ec02a1/S/IMG_0007-S.jpg">
+				2007
+				</option>
+                <option value="https://photos.smugmug.com/Sports/Raiders-at-Buccaneers-2008/i-nCnjMtf/0/c062eb01/S/IMG_1509-S.jpg">
+				2008
+				</option>
+                <option value="https://photos.smugmug.com/Tech-Community/Codestock-2009/i-jNZTHJv/0/c787f092/S/IMG_5675-S.jpg">
+				2009
+				</option>
+                <option value="https://photos.smugmug.com/Travel/New-York-City-2012/i-47W597s/0/a16c8acb/S/IMG_0891-S.jpg">
+				2012(1)
+				</option>
+                <option value="https://photos.smugmug.com/Tech-Community/2012-Microsoft-MVP-Global/i-KTCsNHL/0/affbd05c/S/IMG_0122-S.jpg">
+				2012(2)
+				</option>
+                <option value="https://photos.smugmug.com/Other/Chicago-Spring-2015/i-d9tjVFL/0/d435c664/S/IMG_1066-S.jpg">
+				2015
+				</option>
+                <option selected value="https://photos.smugmug.com/Travel/Czech-Republic-2017-all/i-3szgcmb/0/8308a90d/S/20170615_070302-S.jpg">
+				2017
+				</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<div id="Photo1Div">
+				<img id="Image1" src="images/CartoonFace.png">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<!--<div>
+			<button type="button" id="VerifyButton">
+				Verify!
+			</button>
+			</div>-->
+				<div id="OutputDiv"></div>
+		</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+			<div>Image 2</div>
+		</div>
+        <div class="col-md-1">
+            <select id="Image2UrlDropdown">
+                <option value="https://photos.smugmug.com/Family/Giard-family-history/i-7pBzzqP/0/2ef4d8ab/S/Giard_016-S.jpg">
+				1962
+				</option>
+                <option value="https://photos.smugmug.com/Other/Davids-High-School-Years/i-z7CFFM2/0/9427085a/S/DavidGiard1979-S.jpg">
+				1978
+				</option>
+                <option value="https://photos.smugmug.com/Other/John-and-Melissa-Marlow/i-ZG3TRxq/0/2647424a/S/DS050701234250.tif-S.jpg">
+				1989
+				</option>
+                
+                <option value="https://photos.smugmug.com/Other/Herrick-party-1991/i-487dqsG/0/b0f27549/S/DS050706135604.tif-S.jpg">
+				1991
+				</option>
+                <option value="https://photos.smugmug.com/Family/1996-Christmas-Card-Photos/i-pTrRBfw/0/e74f1245/S/DS050804225605.tif-S.jpg">
+				1995
+				</option>
+                <option value="https://photos.smugmug.com/Travel/Lexington-MI-2007/i-5k7WQ64/0/20ec02a1/S/IMG_0007-S.jpg">
+				2007
+				</option>
+                <option value="https://photos.smugmug.com/Sports/Raiders-at-Buccaneers-2008/i-nCnjMtf/0/c062eb01/S/IMG_1509-S.jpg">
+				2008
+				</option>
+                <option value="https://photos.smugmug.com/Tech-Community/Codestock-2009/i-jNZTHJv/0/c787f092/S/IMG_5675-S.jpg">
+				2009
+				</option>
+                <option value="https://photos.smugmug.com/Travel/New-York-City-2012/i-47W597s/0/a16c8acb/S/IMG_0891-S.jpg">
+				2012(1)
+				</option>
+                <option value="https://photos.smugmug.com/Tech-Community/2012-Microsoft-MVP-Global/i-KTCsNHL/0/affbd05c/S/IMG_0122-S.jpg">
+				2012(2)
+				</option>
+                <option value="https://photos.smugmug.com/Other/Chicago-Spring-2015/i-d9tjVFL/0/d435c664/S/IMG_1066-S.jpg">
+				2015
+				</option>
+                <option selected value="https://photos.smugmug.com/Travel/Czech-Republic-2017-all/i-3szgcmb/0/8308a90d/S/20170615_070302-S.jpg">
+				2017
+				</option>
+			</select>
+        </div>
+        <div class="col-md-6">
+            <div id="Photo2Div">
+                <img id="Image2" src="images/CartoonFace.png">
+            </div>
+        </div>
+        <div>&nbsp;</div>
+    </div>
+	</div>
+
+</body>
+
+</html>

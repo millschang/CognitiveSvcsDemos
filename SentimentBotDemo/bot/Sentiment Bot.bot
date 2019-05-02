@@ -1,0 +1,16 @@
+{
+    "name": "Sentiment Bot",
+    "description": "",
+    "version": "2.0",
+    "secretKey": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "name": "http://localhost:3978/api/messages",
+            "id": "26936610-aec3-11e8-88bc-e14468467b15",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978/api/messages"
+        }
+    ]
+}

@@ -18,9 +18,9 @@
       <RootProperty Name="Children" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Padding" />
-      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Width" />
       <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="Name" />
@@ -44,9 +44,9 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Inlines" />
       <RootProperty Name="TextWrapping" />
+      <RootProperty Name="Inlines" />
+      <RootProperty Name="Name" />
     </RootType>
     <RootType FullName="EmotionsDemo.MainPage" />
   </Roots.RootTypes>
